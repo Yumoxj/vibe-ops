@@ -76,11 +76,11 @@ Without observable evidence matching any of these signals, you cannot claim prog
 
 When the standard diagnostic process stalls, escalate progressively:
 
-### Level 1: Hypothesis Failure
+### Level 1: Hypothesis Failure (15min+ on one angle)
 - Same symptom persists after fix → re-read execution path from scratch
 - Switch analysis angle: logs, call chains, state tracing
 
-### Level 2: 3 Hypothesis Failures
+### Level 2: 3 Hypothesis Failures (30min+ total)
 - Execute `/rewind` to roll back session
 - Deep analysis: code structure, how it works, key components
 - Report known/ruled out/unknown to user
@@ -138,4 +138,4 @@ Status: **resolved** / **resolved with caveats** (explain) / **blocked** (explai
 | Change code without a hypothesis | Introduces new bugs | State hypothesis first, then act |
 | Symptom persists after fix | Getting worse with each change | Stop and re-read execution path |
 | State version numbers from memory | Wrong diagnosis direction | Run detection commands, read actual output |
-| Restart 8 times without reading errors | Wasted time | Read the last error message verbatim |
+| Restart multiple times without reading errors | Wasted time | Read the last error message verbatim; no more than two restarts without new evidence |

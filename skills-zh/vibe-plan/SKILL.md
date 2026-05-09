@@ -101,6 +101,8 @@ digraph detect_flow {
 
 **读取上下文：**
 - `memory-bank/feature-phases-*.md`
+- `memory-bank/architecture.md`（如存在）
+- `memory-bank/tech-stack.md`（如存在）
 
 逐个探索以下维度：
 
@@ -139,6 +141,8 @@ digraph detect_flow {
 **读取上下文：**
 - 对应的 `memory-bank/feature-design-*.md`
 - `memory-bank/implementation-plan.md`（了解已有阶段划分）
+- `memory-bank/architecture.md`（如存在）
+- `memory-bank/tech-stack.md`（如存在）
 
 逐个探索：
 1. **功能目标确认** — 这个功能要达成什么

@@ -88,6 +88,12 @@ Drift signals (any one is enough to label drift):
 - Deleted or commented out code unrelated to the target
 - New abstractions introduced that the target doesn't need
 
+Incomplete signals (any one is enough to label incomplete):
+- Target specifies multiple requirements but only some are implemented
+- Placeholder comments (TODO, FIXME, TBD) in the diff related to the target
+- Test coverage missing for implemented functionality
+- Error handling paths left empty or with catch-all pass statements
+
 ---
 
 ## Phase 3: Execute Review
@@ -130,9 +136,9 @@ Applies to code diffs.
 
 | Category | Definition | Presentation |
 |----------|------------|--------------|
-| safe_auto | Unambiguous, no risk: typos, missing imports, style | Present in report |
-| gated_auto | Likely correct but changes behavior: null checks, error handling | Present in report |
-| manual | Requires judgment: architecture, behavior changes, security tradeoffs | Present in report |
+| safe_auto | Unambiguous, no risk: typos, missing imports, style | Present in report, auto-fix OK |
+| gated_auto | Likely correct but changes behavior: null checks, error handling | Present in report, requires user confirmation before fixing |
+| manual | Requires judgment: architecture, behavior changes, security tradeoffs | Present in report, requires user decision |
 
 ### 3.3 Findings Report (required before any fix)
 

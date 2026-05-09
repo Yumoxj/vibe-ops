@@ -62,6 +62,8 @@ digraph design_overview {
 | `references/interaction-principles.md` | Core Q&A and design presentation principles |
 | `references/feature-phases-template.md` | Phased feature list document template |
 | `references/feature-design-template.md` | Per-phase design document template |
+| `references/architecture-template.md` | Architecture document template |
+| `references/tech-stack-template.md` | Tech stack document template |
 
 ---
 
@@ -120,15 +122,38 @@ If no reference document:
 - Q&A to explore: what is the goal, what exists already, what is the tech context
 - Present your understanding in a summary paragraph (200-300 words) and confirm
 
-**Step 2: Architecture Overview**
+**Step 2: Architecture and Tech Stack**
 
-Explore architecture dimensions one by one:
+Before creating the phased feature list, establish the project's architecture and tech stack as standalone documents.
+
+**2a. Check for existing documents**
+
+```bash
+# Check if architecture.md and tech-stack.md already exist
+Glob pattern: "memory-bank/architecture.md"
+Glob pattern: "memory-bank/tech-stack.md"
+```
+
+If both exist, confirm with user whether they still reflect current state. If yes, skip to Step 3. If no, update them through Q&A.
+
+**2b. Interactive Q&A**
+
+Explore architecture dimensions one by one (only for missing or outdated documents):
 1. **Purpose and scope** — One-sentence project purpose, in/out of scope
-2. **Tech stack** — Languages, frameworks, tools (can be auto-filled from reference docs)
-3. **Architecture diagram** — ASCII diagram or description of component relationships
-4. **Directory structure** — Planned file layout
+2. **Architecture diagram** — ASCII diagram or description of component relationships, component responsibilities
+3. **Directory structure** — Planned file layout
+4. **Tech stack** — Languages, frameworks, tools, versions, why chosen
+5. **External services** — Third-party APIs, SDKs, constraints
 
-Confirm each before proceeding.
+Confirm each dimension before proceeding.
+
+**2c. Generate documents**
+
+Create or update:
+- `memory-bank/architecture.md` (template: `references/architecture-template.md`)
+- `memory-bank/tech-stack.md` (template: `references/tech-stack-template.md`)
+
+These are single source of truth for the project's architecture and technology choices. All feature-phases and feature-design documents reference them.
 
 **Step 3: Phase Breakdown**
 
@@ -140,13 +165,15 @@ Present the phase breakdown. Each phase must be independently compilable and ver
 
 **Step 4: Document Generation**
 
-Generate `memory-bank/feature-phases-[name].md` (template see `references/feature-phases-template.md`).
+Generate `memory-bank/feature-phases-[name].md` (template see `references/feature-phases-template.md`). Architecture Overview section references `architecture.md` and `tech-stack.md` rather than duplicating their content.
 
 ### Mode B: Design a Specific Phase
 
 For: `feature-phases-*.md` exists, user wants to design one or more phases in detail.
 
 **Step 1: Phase Status Display**
+
+Check for `memory-bank/architecture.md` and `memory-bank/tech-stack.md`. If either is missing, warn the user and suggest running Mode A Step 2 first to establish project foundation documents.
 
 Read phases list from `feature-phases-*.md`, check existing feature-design files in `memory-bank/`, display phase status:
 

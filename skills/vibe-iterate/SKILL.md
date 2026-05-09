@@ -61,6 +61,7 @@ Before execution, ask the user to choose their preferred Git commit frequency:
 | progress.md | Update after each step, record date, step, key changes |
 | Plan document update | After each phase, update `implementation-plan.md` or `feature-plan-*.md`, mark completed items |
 | Design document update | Only update `memory-bank/feature-phases-*.md` for architecture changes |
+| Architecture/tech-stack check | After each phase, compare changes against `architecture.md` and `tech-stack.md`, suggest updates if affected (advisory, not blocking) |
 | Status tracking | After completing a phase, update phase status in `feature-phases-*.md` (designing → done) and `feature-design-*.md` (pending → done) |
 | Git commits | Execute according to the user's chosen **Commit Strategy** (All-at-once, Phase-by-phase, or Step-by-step) |
 | Archive | Do not read records under `memory-bank/archive/` |
@@ -138,9 +139,25 @@ After both review stages pass, wait for user confirmation: ✅ pass / ❌ fail
   - Completed step number and name
   - Key decisions or changes (if any)
 
+Format example:
+```
+## 2026-01-15
+- [x] Step 3: Add user authentication endpoint
+  - Decided: use JWT over session tokens (stateless, scales better)
+  - Files: src/auth/jwt.ts, src/routes/login.ts
+```
+
 **After each phase:**
 - Update `memory-bank/implementation-plan.md` or `feature-plan-*.md`
 - Mark all steps in that phase as completed (e.g., change `[ ]` to `[x]`)
+- **Architecture/tech-stack consistency check:**
+  1. Read `memory-bank/architecture.md` and `memory-bank/tech-stack.md` (skip if they don't exist)
+  2. Compare with the actual changes made in this phase
+  3. If changes affect architecture, components, tech choices, or directory structure:
+     - Use AskUserQuestion to suggest updates (e.g., "This phase added a new component. Should architecture.md be updated?")
+     - Do not block execution — this is advisory only
+  4. If user agrees, update the relevant document and record in its Changes Log section
+  5. Update the `Last reviewed` date in both documents regardless of changes
 
 ### 6. Git Commit Confirmation
 

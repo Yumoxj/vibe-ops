@@ -15,24 +15,13 @@ This document contains the phased feature list template used by the `vibe-design
 
 ## Architecture Overview
 
+> See [architecture.md](architecture.md) and [tech-stack.md](tech-stack.md) for full details. These documents are created by vibe-design Mode A Step 2; if missing, run /vibe-design to create them first.
+
 ### Purpose
 [One sentence describing the project purpose]
 
 ### Architecture Diagram
-[ASCII diagram or description of the overall architecture]
-
-### Tech Stack
-
-| Technology | Version | Purpose | Notes |
-|------------|---------|---------|-------|
-
-### Directory Structure
-
-```
-project-root/
-├── [directory/file]
-└── [directory/file]
-```
+[ASCII diagram or description — full version in architecture.md]
 
 ---
 

@@ -15,24 +15,13 @@
 
 ## 架构概览
 
+> 完整架构和技术栈详见 [architecture.md](architecture.md) 和 [tech-stack.md](tech-stack.md)。这两个文档由 vibe-design Mode A Step 2 创建；如缺失，先运行 /vibe-design 创建。
+
 ### 目的
 [一句话描述项目目的]
 
 ### 架构图
-[ASCII 图或整体架构描述]
-
-### 技术栈
-
-| 技术 | 版本 | 用途 | 备注 |
-|------|------|------|------|
-
-### 目录结构
-
-```
-project-root/
-├── [directory/file]
-└── [directory/file]
-```
+[ASCII 图或整体架构描述 — 完整版本在 architecture.md]
 
 ---
 

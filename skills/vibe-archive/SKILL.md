@@ -38,6 +38,8 @@ digraph archive_usage {
 
 **Do not archive:**
 - Main design document (`feature-phases-*.md`) — always keep in memory-bank
+- Architecture document (`architecture.md`) — always keep in memory-bank
+- Tech stack document (`tech-stack.md`) — always keep in memory-bank
 - In-progress feature documents (incomplete `feature-plan-*.md`)
 - In-progress implementation plan phases
 
@@ -106,6 +108,7 @@ memory-bank/archive/
 | Index completeness | archived-items.md index is complete |
 | In-progress content | In-progress content is unaffected |
 | Main design document | feature-phases-*.md was not moved |
+| Architecture/tech-stack docs | architecture.md and tech-stack.md were not moved |
 
 ---
 
@@ -113,7 +116,7 @@ memory-bank/archive/
 
 | Mistake | Consequence | Correct approach |
 |---------|-------------|------------------|
-| Archive main design document | Lost core context | Main design document is always kept |
+| Archive main design document | Lost core context | Main design document, architecture.md, and tech-stack.md are always kept |
 | Archive incomplete features | Feature information lost | Only archive completed features |
 | Skip user confirmation | Accidentally delete important files | Must wait for user confirmation |
 

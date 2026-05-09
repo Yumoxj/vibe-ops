@@ -101,6 +101,8 @@ Interaction rules:
 
 **Read context:**
 - `memory-bank/feature-phases-*.md`
+- `memory-bank/architecture.md` (if exists)
+- `memory-bank/tech-stack.md` (if exists)
 
 Explore the following dimensions one by one:
 
@@ -139,6 +141,8 @@ Explore the following dimensions one by one:
 **Read context:**
 - Corresponding `memory-bank/feature-design-*.md`
 - `memory-bank/implementation-plan.md` (to understand existing phase breakdown)
+- `memory-bank/architecture.md` (if exists)
+- `memory-bank/tech-stack.md` (if exists)
 
 Explore one by one:
 

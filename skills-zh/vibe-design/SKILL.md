@@ -62,6 +62,8 @@ digraph design_overview {
 | `references/interaction-principles.md` | 核心问答与设计呈现原则 |
 | `references/feature-phases-template.md` | 阶段式功能清单文档模板 |
 | `references/feature-design-template.md` | 逐阶段设计文档模板 |
+| `references/architecture-template.md` | 架构文档模板 |
+| `references/tech-stack-template.md` | 技术栈文档模板 |
 
 ---
 
@@ -120,15 +122,38 @@ digraph detect_flow {
 - 通过 Q&A 探索：目标是什么、已有什么、技术上下文是什么
 - 以 200-300 字的摘要呈现理解，请用户确认
 
-**Step 2: 架构概览**
+**Step 2: 架构与技术栈**
 
-逐个探索架构维度：
+在创建阶段式功能清单之前，先建立项目架构和技术栈的独立文档。
+
+**2a. 检查已有文档**
+
+```bash
+# 检查 architecture.md 和 tech-stack.md 是否已存在
+Glob pattern: "memory-bank/architecture.md"
+Glob pattern: "memory-bank/tech-stack.md"
+```
+
+如两者都已存在，向用户确认是否仍反映当前状态。如是，跳至 Step 3。如否，通过 Q&A 更新。
+
+**2b. 交互式 Q&A**
+
+逐个探索架构维度（仅针对缺失或过时的文档）：
 1. **目的和范围** — 一句话项目目的，包含/不包含什么
-2. **技术栈** — 语言、框架、工具（可从参考文档自动填充）
-3. **架构图** — ASCII 图或组件关系描述
-4. **目录结构** — 规划的文件布局
+2. **架构图** — ASCII 图或组件关系描述，组件职责
+3. **目录结构** — 规划的文件布局
+4. **技术栈** — 语言、框架、工具、版本、选型理由
+5. **外部服务** — 第三方 API、SDK、约束
 
 每个维度确认后再继续。
+
+**2c. 生成文档**
+
+创建或更新：
+- `memory-bank/architecture.md`（模板：`references/architecture-template.md`）
+- `memory-bank/tech-stack.md`（模板：`references/tech-stack-template.md`）
+
+这两个文档是项目架构和技术选型的单一事实来源。所有 feature-phases 和 feature-design 文档引用它们。
 
 **Step 3: 阶段划分**
 
@@ -140,13 +165,15 @@ digraph detect_flow {
 
 **Step 4: 文档生成**
 
-生成 `memory-bank/feature-phases-[name].md`（模板见 `references/feature-phases-template.md`）。
+生成 `memory-bank/feature-phases-[name].md`（模板见 `references/feature-phases-template.md`）。架构概览部分引用 `architecture.md` 和 `tech-stack.md`，不重复其内容。
 
 ### Mode B: 设计特定阶段
 
 适用于：`feature-phases-*.md` 已存在，用户想逐个设计各阶段。
 
 **Step 1: 阶段状态展示**
+
+检查 `memory-bank/architecture.md` 和 `memory-bank/tech-stack.md` 是否存在。如任一缺失，提醒用户并建议先通过 Mode A Step 2 建立项目基础文档。
 
 读取 `feature-phases-*.md` 中的阶段列表，检查 `memory-bank/` 中已有的 feature-design 文件，展示阶段状态：
 

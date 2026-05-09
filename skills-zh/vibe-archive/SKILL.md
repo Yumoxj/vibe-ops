@@ -38,6 +38,8 @@ digraph archive_usage {
 
 **不归档的内容：**
 - 主设计文档（`feature-phases-*.md`）— 始终保留在 memory-bank 中
+- 架构文档（`architecture.md`）— 始终保留在 memory-bank 中
+- 技术栈文档（`tech-stack.md`）— 始终保留在 memory-bank 中
 - 进行中的功能文档（未完成的 `feature-plan-*.md`）
 - 进行中的实施计划阶段
 
@@ -106,6 +108,7 @@ memory-bank/archive/
 | 索引完整性 | archived-items.md 索引完整 |
 | 进行中内容 | 进行中内容未受影响 |
 | 主设计文档 | feature-phases-*.md 未被移动 |
+| 架构/技术栈文档 | architecture.md 和 tech-stack.md 未被移动 |
 
 ---
 
@@ -113,7 +116,7 @@ memory-bank/archive/
 
 | 错误 | 后果 | 正确做法 |
 |------|------|----------|
-| 归档主设计文档 | 丢失核心上下文 | 主设计文档始终保留 |
+| 归档主设计文档 | 丢失核心上下文 | 主设计文档、architecture.md、tech-stack.md 始终保留 |
 | 归档未完成的功能 | 功能信息丢失 | 只归档已完成的 feature |
 | 跳过用户确认 | 误删重要文件 | 必须等待用户确认 |
 

@@ -28,6 +28,8 @@ Each skill invoked as `/vibe-<name>`, operates on shared `memory-bank/` in targe
 
 | File | Created by | Purpose |
 |------|-----------|---------|
+| `architecture.md` | vibe-design | Single source of truth for project architecture (never archived) |
+| `tech-stack.md` | vibe-design | Single source of truth for technology choices (never archived) |
 | `feature-phases-*.md` | vibe-design | Phased feature list with status tracking |
 | `feature-design-*.md` | vibe-design | Per-phase design specs |
 | `implementation-plan.md` | vibe-plan | Step-by-step plan with verification criteria |
