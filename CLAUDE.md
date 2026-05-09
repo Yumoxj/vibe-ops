@@ -26,16 +26,32 @@ Each skill invoked as `/vibe-<name>`, operates on shared `memory-bank/` in targe
 
 `memory-bank/` = single source of truth across all skills:
 
+```
+memory-bank/
+├── architecture.md          # Project architecture (never archived)
+├── tech-stack.md            # Technology choices (never archived)
+├── progress.md              # Execution log
+├── designs/
+│   ├── feature-phases-*.md  # Phased feature list with Plan Groups
+│   └── feature-design-*.md  # Per-phase design specs
+├── plans/
+│   ├── feature-phases-*-g*-plan.md  # Per-group implementation plans
+│   └── feature-plan-*.md            # Ad-hoc feature plans
+└── archive/                 # Completed items (never read by vibe-iterate)
+```
+
 | File | Created by | Purpose |
 |------|-----------|---------|
 | `architecture.md` | vibe-design | Single source of truth for project architecture (never archived) |
 | `tech-stack.md` | vibe-design | Single source of truth for technology choices (never archived) |
-| `feature-phases-*.md` | vibe-design | Phased feature list with status tracking |
-| `feature-design-*.md` | vibe-design | Per-phase design specs |
-| `implementation-plan.md` | vibe-plan | Step-by-step plan with verification criteria |
-| `feature-plan-*.md` | vibe-plan | Feature-specific implementation plan |
+| `designs/feature-phases-*.md` | vibe-design | Phased feature list with Plan Groups section and status tracking |
+| `designs/feature-design-*.md` | vibe-design | Per-phase design specs |
+| `plans/feature-phases-*-g*-plan.md` | vibe-plan | Per-group implementation plan with verification criteria |
+| `plans/feature-plan-*.md` | vibe-plan | Ad-hoc feature-specific implementation plan |
 | `progress.md` | vibe-iterate | Execution log (date, step, key changes) |
 | `archive/` | vibe-archive | Completed items (never read by vibe-iterate) |
+
+**Plan file naming:** `feature-phases-[name]-g[N]-plan.md` in `plans/` — one plan file per Plan Group defined in `designs/feature-phases-*.md`. Groups are evaluated by vibe-design Step 3.5 based on phase coupling and complexity.
 
 ### vibe-iterate: Controller + Subagent Pattern
 

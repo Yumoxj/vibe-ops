@@ -26,7 +26,7 @@ Core rules:
 
 **Use cases:**
 - Execute implementation plans created by /vibe-plan
-- Complete steps in implementation-plan.md or feature-plan-*.md one at a time
+- Complete steps in group plans (`feature-phases-*-g*-plan.md`) or feature plans (`feature-plan-*.md`) one at a time
 
 **Not for:**
 - Design documents (use /vibe-design)
@@ -40,8 +40,13 @@ Core rules:
 
 | Input | File |
 |-------|------|
-| Main implementation plan | `memory-bank/implementation-plan.md` |
-| Feature implementation plan | `memory-bank/feature-plan-*.md` |
+| Group implementation plan | `memory-bank/plans/feature-phases-*-g*-plan.md` |
+| Feature implementation plan | `memory-bank/plans/feature-plan-*.md` |
+
+**Detection logic:**
+1. Glob `memory-bank/plans/feature-phases-*-g*-plan.md` → list all group plans
+2. If multiple group plans exist, ask user which group to execute
+3. If no group plans, check `memory-bank/plans/feature-plan-*.md`
 
 If unclear, use AskUserQuestion to confirm.
 
@@ -59,8 +64,8 @@ Before execution, ask the user to choose their preferred Git commit frequency:
 | Strategy | Rule |
 |----------|------|
 | progress.md | Update after each step, record date, step, key changes |
-| Plan document update | After each phase, update `implementation-plan.md` or `feature-plan-*.md`, mark completed items |
-| Design document update | Only update `memory-bank/feature-phases-*.md` for architecture changes |
+| Plan document update | After each phase, update group plan file or `feature-plan-*.md`, mark completed items |
+| Design document update | Only update `memory-bank/designs/feature-phases-*.md` for architecture changes |
 | Architecture/tech-stack check | After each phase, compare changes against `architecture.md` and `tech-stack.md`, suggest updates if affected (advisory, not blocking) |
 | Status tracking | After completing a phase, update phase status in `feature-phases-*.md` (designing → done) and `feature-design-*.md` (pending → done) |
 | Git commits | Execute according to the user's chosen **Commit Strategy** (All-at-once, Phase-by-phase, or Step-by-step) |
@@ -148,7 +153,7 @@ Format example:
 ```
 
 **After each phase:**
-- Update `memory-bank/implementation-plan.md` or `feature-plan-*.md`
+- Update current group plan file in `memory-bank/plans/` or `feature-plan-*.md`
 - Mark all steps in that phase as completed (e.g., change `[ ]` to `[x]`)
 - **Architecture/tech-stack consistency check:**
   1. Read `memory-bank/architecture.md` and `memory-bank/tech-stack.md` (skip if they don't exist)
@@ -188,7 +193,7 @@ Return to Step 1 and continue until all steps are complete.
 
 ## Completion Criteria
 
-- **Main project**: All steps in `implementation-plan.md` are complete
-- **Feature development**: All steps in `feature-plan-*.md` are complete
+- **Group plan**: All steps in current `memory-bank/plans/feature-phases-*-g*-plan.md` are complete
+- **Feature development**: All steps in `memory-bank/plans/feature-plan-*.md` are complete
 
 After completion, suggest user invoke `/vibe-review` for final review.

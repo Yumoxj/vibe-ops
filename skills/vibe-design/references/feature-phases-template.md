@@ -49,6 +49,18 @@ This document contains the phased feature list template used by the `vibe-design
 
 ---
 
+## Plan Groups
+
+| Group | Phases | Rationale |
+|-------|--------|-----------|
+| G1 | Phase 0, Phase 1 | [Why grouped together] |
+| G2 | Phase 2 | [Why standalone] |
+| ... | ... | ... |
+
+> Each group produces one implementation plan file: `feature-phases-[name]-g[N]-plan.md`
+
+---
+
 ## Risks and Constraints
 
 [Known risks, memory budget, device requirements, etc.]

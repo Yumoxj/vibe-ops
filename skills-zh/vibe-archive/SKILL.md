@@ -33,15 +33,15 @@ digraph archive_usage {
 
 **触发条件（任一即触发）：**
 - `progress.md`: > 50 步
-- `feature-plan-*.md`: > 5 个已完成功能
-- `implementation-plan.md`: > 3 个已完成阶段
+- `memory-bank/plans/feature-plan-*.md`: > 5 个已完成功能
+- `memory-bank/plans/feature-phases-*-g*-plan.md`: > 3 个已完成分组计划
 
 **不归档的内容：**
-- 主设计文档（`feature-phases-*.md`）— 始终保留在 memory-bank 中
-- 架构文档（`architecture.md`）— 始终保留在 memory-bank 中
-- 技术栈文档（`tech-stack.md`）— 始终保留在 memory-bank 中
-- 进行中的功能文档（未完成的 `feature-plan-*.md`）
-- 进行中的实施计划阶段
+- 主设计文档（`memory-bank/designs/feature-phases-*.md`）— 始终保留
+- 架构文档（`memory-bank/architecture.md`）— 始终保留
+- 技术栈文档（`memory-bank/tech-stack.md`）— 始终保留
+- 进行中的功能文档（未完成的 `memory-bank/plans/feature-plan-*.md`）
+- 进行中的分组计划文件（未完成的 `memory-bank/plans/feature-phases-*-g*-plan.md`）
 
 ---
 
@@ -51,8 +51,8 @@ digraph archive_usage {
 
 分析以下内容：
 1. 统计 `progress.md` 行数和日期范围
-2. 扫描 `feature-plan-*.md` 文件，识别已完成和进行中的功能
-3. 检查 `implementation-plan.md` 完成阶段数量
+2. 扫描 `memory-bank/plans/feature-plan-*.md` 文件，识别已完成和进行中的功能
+3. 扫描 `memory-bank/plans/feature-phases-*-g*-plan.md` 文件，识别已完成的分组计划
 4. 评估是否需要归档
 
 ### 第二步：生成归档建议
@@ -76,8 +76,9 @@ memory-bank/archive/
 │   └── progress-archive-YYYY-MM-DD.md
 ├── features/
 │   └── features-archive-YYYY-MM-DD.md
-└── plans/
-    └── implementation-plan-archive-YYYY-MM-DD.md
+├── plans/
+│   └── plans-archive-YYYY-MM-DD.md
+└── archived-items.md
 ```
 
 **操作步骤：**
@@ -97,7 +98,7 @@ memory-bank/archive/
 |----------|----------|--------------|
 | YYYY-MM-DD | progress-archive-YYYY-MM-DD.md | progress.md [日期范围] 的已完成步骤 |
 | YYYY-MM-DD | features-archive-YYYY-MM-DD.md | [功能名称列表] |
-| YYYY-MM-DD | implementation-plan-archive-YYYY-MM-DD.md | 阶段 [1-N] |
+| YYYY-MM-DD | plans-archive-YYYY-MM-DD.md | 分组计划 [1-N] |
 ```
 
 ### 第五步：验证
@@ -107,7 +108,7 @@ memory-bank/archive/
 | 归档完整性 | 归档文件正确创建 |
 | 索引完整性 | archived-items.md 索引完整 |
 | 进行中内容 | 进行中内容未受影响 |
-| 主设计文档 | feature-phases-*.md 未被移动 |
+| 主设计文档 | `memory-bank/designs/feature-phases-*.md` 未被移动 |
 | 架构/技术栈文档 | architecture.md 和 tech-stack.md 未被移动 |
 
 ---

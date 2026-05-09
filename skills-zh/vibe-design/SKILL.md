@@ -77,7 +77,7 @@ digraph design_overview {
 
 ```bash
 # 使用 Glob 检查是否存在阶段式功能清单
-Glob pattern: "memory-bank/feature-phases-*.md"
+Glob pattern: "memory-bank/designs/feature-phases-*.md"
 ```
 
 ```dot
@@ -163,9 +163,34 @@ Glob pattern: "memory-bank/tech-stack.md"
 3. 允许调整：合并、拆分、重新排序
 4. 所有阶段初始状态为 `pending`
 
+**Step 3.5: 计划分组**
+
+阶段划分确认后，评估如何将阶段分组为实施计划。复杂项目生成多个计划文件；简单项目可能只需一个计划。
+
+**分析信号：**
+1. 相邻阶段共享 >2 个文件 → 合并
+2. 阶段 B 完全依赖阶段 A 的产出 → 合并
+3. 单阶段步骤 <3 且无独立验证价值 → 与相邻阶段合并
+4. 阶段间可独立编译和验证 → 保持独立
+
+**流程：**
+1. 分析阶段依赖、共享文件和复杂度
+2. 建议分组：`| 分组 | 阶段 | 理由 |`
+3. 交互式确认：用户接受、调整或覆盖
+4. 将分组信息存入 `feature-phases-*.md` 的 Plan Groups 部分
+
+**示例输出：**
+```
+| 分组 | 阶段 | 理由 |
+|------|------|------|
+| G1 | Phase 0, Phase 1 | 基础搭建，共享配置 |
+| G2 | Phase 2, Phase 3 | 核心功能，共享数据模型 |
+| G3 | Phase 4 | 独立增强 |
+```
+
 **Step 4: 文档生成**
 
-生成 `memory-bank/feature-phases-[name].md`（模板见 `references/feature-phases-template.md`）。架构概览部分引用 `architecture.md` 和 `tech-stack.md`，不重复其内容。
+生成 `memory-bank/designs/feature-phases-[name].md`（模板见 `references/feature-phases-template.md`）。必须包含 Step 3.5 的 Plan Groups 部分。架构概览部分引用 `architecture.md` 和 `tech-stack.md`，不重复其内容。
 
 ### Mode B: 设计特定阶段
 
@@ -175,7 +200,7 @@ Glob pattern: "memory-bank/tech-stack.md"
 
 检查 `memory-bank/architecture.md` 和 `memory-bank/tech-stack.md` 是否存在。如任一缺失，提醒用户并建议先通过 Mode A Step 2 建立项目基础文档。
 
-读取 `feature-phases-*.md` 中的阶段列表，检查 `memory-bank/` 中已有的 feature-design 文件，展示阶段状态：
+读取 `feature-phases-*.md` 中的阶段列表，检查 `memory-bank/designs/` 中已有的 feature-design 文件，展示阶段状态：
 
 ```
 | Phase | 名称 | 状态 |
@@ -201,7 +226,7 @@ Glob pattern: "memory-bank/tech-stack.md"
 
 **Step 4: 文档生成**
 
-创建 `memory-bank/feature-design-[name].md`，头部标注所属阶段和状态：
+创建 `memory-bank/designs/feature-design-[name].md`，头部标注所属阶段和状态：
 
 ```markdown
 > Phase: Phase N - [阶段名称]

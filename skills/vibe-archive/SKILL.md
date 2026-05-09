@@ -33,15 +33,15 @@ digraph archive_usage {
 
 **Trigger conditions (any one triggers):**
 - `progress.md`: > 50 steps
-- `feature-plan-*.md`: > 5 completed features
-- `implementation-plan.md`: > 3 completed phases
+- `memory-bank/plans/feature-plan-*.md`: > 5 completed features
+- `memory-bank/plans/feature-phases-*-g*-plan.md`: > 3 completed group plans
 
 **Do not archive:**
-- Main design document (`feature-phases-*.md`) — always keep in memory-bank
-- Architecture document (`architecture.md`) — always keep in memory-bank
-- Tech stack document (`tech-stack.md`) — always keep in memory-bank
-- In-progress feature documents (incomplete `feature-plan-*.md`)
-- In-progress implementation plan phases
+- Main design document (`memory-bank/designs/feature-phases-*.md`) — always keep
+- Architecture document (`memory-bank/architecture.md`) — always keep
+- Tech stack document (`memory-bank/tech-stack.md`) — always keep
+- In-progress feature documents (incomplete `memory-bank/plans/feature-plan-*.md`)
+- In-progress group plan files (incomplete `memory-bank/plans/feature-phases-*-g*-plan.md`)
 
 ---
 
@@ -51,8 +51,8 @@ digraph archive_usage {
 
 Analyze the following:
 1. Count `progress.md` lines and date range
-2. Scan `feature-plan-*.md` files, identify completed and in-progress features
-3. Check `implementation-plan.md` completed phase count
+2. Scan `memory-bank/plans/feature-plan-*.md` files, identify completed and in-progress features
+3. Scan `memory-bank/plans/feature-phases-*-g*-plan.md` files, identify completed group plans
 4. Assess whether archiving is needed
 
 ### Step 2: Generate Archive Suggestions
@@ -76,8 +76,9 @@ memory-bank/archive/
 │   └── progress-archive-YYYY-MM-DD.md
 ├── features/
 │   └── features-archive-YYYY-MM-DD.md
-└── plans/
-    └── implementation-plan-archive-YYYY-MM-DD.md
+├── plans/
+│   └── plans-archive-YYYY-MM-DD.md
+└── archived-items.md
 ```
 
 **Steps:**
@@ -97,7 +98,7 @@ memory-bank/archive/
 |-------------|-------------|-----------------|
 | YYYY-MM-DD | progress-archive-YYYY-MM-DD.md | Completed steps from progress.md [date range] |
 | YYYY-MM-DD | features-archive-YYYY-MM-DD.md | [Feature name list] |
-| YYYY-MM-DD | implementation-plan-archive-YYYY-MM-DD.md | Phases [1-N] |
+| YYYY-MM-DD | plans-archive-YYYY-MM-DD.md | Group plans [1-N] |
 ```
 
 ### Step 5: Verify
@@ -107,7 +108,7 @@ memory-bank/archive/
 | Archive completeness | Archive files created correctly |
 | Index completeness | archived-items.md index is complete |
 | In-progress content | In-progress content is unaffected |
-| Main design document | feature-phases-*.md was not moved |
+| Main design document | `memory-bank/designs/feature-phases-*.md` was not moved |
 | Architecture/tech-stack docs | architecture.md and tech-stack.md were not moved |
 
 ---

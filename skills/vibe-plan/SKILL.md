@@ -1,6 +1,6 @@
 ---
 name: vibe-plan
-description: "Use when creating implementation plans from design documents. Outputs to memory-bank as implementation-plan.md or feature-plan-*.md."
+description: "Use when creating implementation plans from design documents. Outputs to memory-bank as feature-phases-[name]-g[N]-plan.md or feature-plan-*.md."
 ---
 
 # Vibe Plan
@@ -16,8 +16,8 @@ Core principles:
 - **Code ban** — Plans containing code cause AI to copy instead of understand
 
 Smart detection:
-- No `implementation-plan.md` → Main project plan mode
-- `implementation-plan.md` exists → Feature plan mode
+- `feature-phases-*-g*-plan.md` not found for a group → Group plan mode (create plan for that group)
+- All group plans exist → Ad-hoc feature plan mode (create standalone feature plan)
 
 ```dot
 digraph plan_overview {
@@ -25,7 +25,7 @@ digraph plan_overview {
     node [fontname="Arial", fontsize=12];
 
     start [shape=ellipse, label="User invokes /vibe-plan"];
-    phase1 [shape=box, label="Phase 1: Mode Detection\n(Glob implementation-plan.md)"];
+    phase1 [shape=box, label="Phase 1: Mode Detection\n(Glob feature-phases-*-g*-plan.md)"];
     phase2 [shape=box, label="Phase 2: Interactive Planning\n(AskUserQuestion)"];
     phase3 [shape=ellipse, label="Phase 3: Next Steps"];
 
@@ -60,30 +60,42 @@ digraph plan_overview {
 ## Phase 1: Detect Plan Context
 
 ```bash
-Glob pattern: "memory-bank/implementation-plan.md"
+Glob pattern: "memory-bank/plans/feature-phases-*-g*-plan.md"
+Glob pattern: "memory-bank/designs/feature-phases-*.md"
 ```
+
+**Step 1:** Read `feature-phases-*.md` to extract Plan Groups.
+
+**Step 2:** Check which groups already have plan files. For each group, check if `feature-phases-[name]-g[N]-plan.md` exists.
 
 | Detection result | Mode | Action |
 |------------------|------|--------|
-| File does not exist | **Main project plan mode** | Enter Phase 2.1 |
-| File exists | **Feature plan mode** | Enter Phase 2.2 |
-| Uncertain | **Ask user** | Use AskUserQuestion to confirm intent |
+| Group(s) without plan files | **Group plan mode** | Enter Phase 2.1 for each missing group |
+| All groups have plans | **Ad-hoc feature plan mode** | Enter Phase 2.2 |
+| No `feature-phases-*.md` found | **Ask user** | Use AskUserQuestion to confirm intent |
+| No `feature-phases-*.md` found | **Ask user** | Use AskUserQuestion to confirm intent |
 
 ```dot
 digraph detect_flow {
     rankdir=TB;
     node [fontname="Arial", fontsize=12];
 
-    check [shape=diamond, label="implementation-plan.md\nexists?"];
-    main [shape=box, label="Main project plan mode\n(Phase 2.1)"];
-    feature [shape=box, label="Feature plan mode\n(Phase 2.2)"];
+    check [shape=diamond, label="feature-phases-*.md\nexists?"];
+    groups [shape=diamond, label="All groups\nhave plans?"];
+    group_mode [shape=box, label="Group plan mode\n(Phase 2.1)"];
+    adhoc [shape=box, label="Ad-hoc feature plan\n(Phase 2.2)"];
     ask [shape=box, label="Ask user intent"];
 
-    check -> main [label="No"];
-    check -> feature [label="Yes"];
-    check -> ask [label="Uncertain"];
+    check -> groups [label="Yes"];
+    check -> ask [label="No"];
+    groups -> group_mode [label="Missing plans"];
+    groups -> adhoc [label="All exist"];
 }
 ```
+
+**Naming convention:**
+- Group plans: `memory-bank/plans/feature-phases-[name]-g[N]-plan.md`
+- Example: `feature-phases-messaging.md` G1 → `feature-phases-messaging-g1-plan.md`
 
 ---
 
@@ -97,21 +109,30 @@ Interaction rules:
 - **No code in plans**: each step contains only instructions, no implementation code
 - Confirm each dimension before moving to the next
 
-### 2.1 Main Project Plan Mode
+### 2.1 Group Plan Mode
 
 **Read context:**
-- `memory-bank/feature-phases-*.md`
+- `memory-bank/designs/feature-phases-*.md` (Plan Groups section + phase details)
+- `memory-bank/designs/feature-design-*.md` for phases in this group (if exist)
 - `memory-bank/architecture.md` (if exists)
 - `memory-bank/tech-stack.md` (if exists)
 
-Explore the following dimensions one by one:
+For each group missing a plan, explore these dimensions one by one:
 
-1. **Tech stack confirmation** — Dependency versions, compatibility, alternatives
-2. **Implementation phase breakdown** — Split into phases by feature module or priority
-3. **Steps per phase** — Break into verifiable concrete steps
-4. **Step dependencies** — Which steps have sequential dependencies
+1. **Group scope confirmation** — Which phases this group covers, overall goal
+2. **Tech stack confirmation** — Dependency versions, compatibility (if not already in tech-stack.md)
+3. **Steps breakdown** — Break each phase in the group into verifiable concrete steps
+4. **Step dependencies** — Which steps have sequential dependencies across phases
 
-**Create document:** `memory-bank/implementation-plan.md`
+**Create document:** `memory-bank/plans/feature-phases-[name]-g[N]-plan.md`
+
+**Document header:**
+```markdown
+> Plan Group: G[N]
+> Phases: Phase X, Phase Y
+> Source: feature-phases-[name].md
+> Status: pending
+```
 
 **Every step must include:**
 
@@ -122,8 +143,8 @@ Explore the following dimensions one by one:
 | **Verification** | How to verify success, must be compilable/testable |
 
 **Iteration strategy (inline rules):**
-- After each feature phase is complete, update `memory-bank/progress.md`
-- Only update `memory-bank/feature-phases-*.md` when architecture changes
+- After each phase within the group is complete, update `memory-bank/progress.md`
+- Only update `memory-bank/designs/feature-phases-*.md` when architecture changes
 - At the end of each phase, ask user whether to git commit
 
 **Validation:**
@@ -133,25 +154,27 @@ Explore the following dimensions one by one:
 | Verifiability | Each step includes a clear verification method |
 | No code | Plan contains only instructions, no implementation code |
 | Appropriate granularity | Each step is neither too large nor too granular |
+| Phase coverage | All phases in the group are covered by steps |
 
 ---
 
-### 2.2 Feature Plan Mode
+### 2.2 Ad-hoc Feature Plan Mode
+
+For: all group plans already exist, user wants an additional standalone feature plan.
 
 **Read context:**
-- Corresponding `memory-bank/feature-design-*.md`
-- `memory-bank/implementation-plan.md` (to understand existing phase breakdown)
+- Corresponding `memory-bank/designs/feature-design-*.md`
+- `memory-bank/designs/feature-phases-*.md` (to understand existing phase breakdown)
 - `memory-bank/architecture.md` (if exists)
 - `memory-bank/tech-stack.md` (if exists)
 
 Explore one by one:
-
 1. **Feature goal confirmation** — What should this feature accomplish
 2. **Step breakdown** — How to split into verifiable steps
 3. **Dependencies and impact** — Which files need to be modified/created
 4. **Acceptance criteria** — What counts as done
 
-**Create document:** `memory-bank/feature-plan-[name].md` (template see `references/feature-plan-template.md`)
+**Create document:** `memory-bank/plans/feature-plan-[name].md` (template see `references/feature-plan-template.md`)
 
 **Validation:**
 

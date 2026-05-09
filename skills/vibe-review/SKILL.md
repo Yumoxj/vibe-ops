@@ -57,8 +57,8 @@ Auto-detect or ask user:
 
 | Target | Detection method | Review type |
 |--------|-----------------|-------------|
-| Design document | `memory-bank/feature-phases-*.md` or `feature-design-*.md` | Document review |
-| Implementation plan | `memory-bank/implementation-plan.md` or `feature-plan-*.md` | Document review |
+| Design document | `memory-bank/designs/feature-phases-*.md` or `memory-bank/designs/feature-design-*.md` | Document review |
+| Implementation plan | `memory-bank/plans/feature-phases-*-g*-plan.md` or `memory-bank/plans/feature-plan-*.md` | Document review |
 | Code changes | Diff between current branch and base branch | Code review |
 
 When uncertain, use AskUserQuestion to confirm intent.

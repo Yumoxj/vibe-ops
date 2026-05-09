@@ -77,7 +77,7 @@ Check if a `memory-bank` folder exists in the project root. Create it if it does
 
 ```bash
 # Use Glob to check if a phased feature list exists
-Glob pattern: "memory-bank/feature-phases-*.md"
+Glob pattern: "memory-bank/designs/feature-phases-*.md"
 ```
 
 ```dot
@@ -163,9 +163,34 @@ Present the phase breakdown. Each phase must be independently compilable and ver
 3. Allow adjustment: merge, split, reorder phases
 4. All phases start with status `pending`
 
+**Step 3.5: Plan Grouping**
+
+After phase breakdown is confirmed, evaluate how phases should be grouped into implementation plans. Complex projects produce multiple plan files; simple ones may use a single plan.
+
+**Analysis signals:**
+1. Adjacent phases sharing >2 files → group together
+2. Phase B fully depends on Phase A's output → group together
+3. Single phase with <3 steps and no independent verification value → merge with adjacent
+4. Phases independently compilable and verifiable → keep separate
+
+**Process:**
+1. Analyze phase dependencies, shared files, and complexity
+2. Suggest grouping: `| Group | Phases | Rationale |`
+3. Interactive Q&A: user accepts, adjusts, or overrides
+4. Store grouping in `feature-phases-*.md` Plan Groups section
+
+**Example output:**
+```
+| Group | Phases | Rationale |
+|-------|--------|-----------|
+| G1 | Phase 0, Phase 1 | Foundation setup, shared config |
+| G2 | Phase 2, Phase 3 | Core feature, shared data model |
+| G3 | Phase 4 | Independent enhancement |
+```
+
 **Step 4: Document Generation**
 
-Generate `memory-bank/feature-phases-[name].md` (template see `references/feature-phases-template.md`). Architecture Overview section references `architecture.md` and `tech-stack.md` rather than duplicating their content.
+Generate `memory-bank/designs/feature-phases-[name].md` (template see `references/feature-phases-template.md`). Must include Plan Groups section from Step 3.5. Architecture Overview section references `architecture.md` and `tech-stack.md` rather than duplicating their content.
 
 ### Mode B: Design a Specific Phase
 
@@ -175,7 +200,7 @@ For: `feature-phases-*.md` exists, user wants to design one or more phases in de
 
 Check for `memory-bank/architecture.md` and `memory-bank/tech-stack.md`. If either is missing, warn the user and suggest running Mode A Step 2 first to establish project foundation documents.
 
-Read phases list from `feature-phases-*.md`, check existing feature-design files in `memory-bank/`, display phase status:
+Read phases list from `feature-phases-*.md`, check existing feature-design files in `memory-bank/designs/`, display phase status:
 
 ```
 | Phase | Name | Status |
@@ -201,7 +226,7 @@ Explore the selected phase's requirements one by one:
 
 **Step 4: Document Generation**
 
-Create `memory-bank/feature-design-[name].md` with phase reference and status in header:
+Create `memory-bank/designs/feature-design-[name].md` with phase reference and status in header:
 
 ```markdown
 > Phase: Phase N - [Phase Name]
