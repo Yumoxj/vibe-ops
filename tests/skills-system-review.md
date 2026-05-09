@@ -1,50 +1,48 @@
 # Vibe Skills System Review
-> Date: 2026-01-23
-> Status: Verified Stable (v1.0)
+> Date: 2026-05-09
+> Status: Verified Stable (v2.0 - Plan Groups)
 
 This document captures the findings from a comprehensive review of the `skills`, `shared`, and `tests` directories, and summarizes the final test execution results.
 
 ## 1. Code Coverage Analysis
 
-All 6 implemented skills have corresponding TDD test scenarios, achieving **100% scenario coverage**.
+All 6 implemented skills have corresponding TDD test scenarios, achieving **100% scenario coverage** for the new `memory-bank/` hierarchy and Plan Groups logic.
 
 | Skill | Type | Core Logic Covered | Test File |
 | :--- | :--- | :--- | :--- |
-| **vibe-design** | Discipline / Pattern | Structure check, Template creation, Template marker detection, Mode switch | `discipline-enforcing-skills.md`, `pattern-skills.md` |
-| **vibe-review** | Discipline | Plan type detection, Comm modes | `discipline-enforcing-skills.md` |
-| **vibe-plan** | Pattern | Template marker detection, No-code plan, 6-point strategy design, Verification | `pattern-skills.md` |
-| **vibe-iterate** | Pattern | Controller+Subagent, 7-step cycle, two-stage review | `pattern-skills.md` |
+| **vibe-design** | Discipline / Pattern | designs/ path check, Step 3.5 Plan Grouping | `discipline-enforcing-skills.md`, `pattern-skills.md` |
+| **vibe-review** | Discipline | plans/ and designs/ detection | `discipline-enforcing-skills.md` |
+| **vibe-plan** | Pattern | Plan Group detection, Group vs Ad-hoc modes | `pattern-skills.md` |
+| **vibe-iterate** | Pattern | plans/ group plan execution | `pattern-skills.md` |
 | **vibe-hunt** | Technique | 诊断驱动调试、假设验证、理性化监控 | `technique-skills.md` |
-| **vibe-archive** | Technique | Stats analysis, Trigger conditions | `technique-skills.md` |
+| **vibe-archive** | Technique | Group plan triggers, designs/ protection | `technique-skills.md` |
 
 ## 2. Test Execution Report (Final Sign-off)
 
-> **Execution Date**: 2026-01-23
-> **Methodology**: TDD (Red-Green-Refactor) with Mock States v3
+> **Execution Date**: 2026-05-09
+> **Methodology**: TDD (Red-Green-Refactor) with updated Plan Groups Scenarios
 
 ### 2.1 Summary
-The system has achieved **100% pass rate** across all 25 test scenarios.
+The system has achieved **100% pass rate** across the updated test scenarios.
 
 | Metric | Result |
 |---|---|
-| **Discipline Skills** | 100% Pass (Robust against pressure) |
-| **Pattern Skills** | 100% Pass (Correct detection in Mock v3) |
-| **Technique Skills** | 100% Pass (Follows process strictly) |
+| **Discipline Skills** | 100% Pass |
+| **Pattern Skills** | 100% Pass (Accurate designs/plans detection) |
+| **Technique Skills** | 100% Pass (Secure archiving of new paths) |
 
 ### 2.2 Mock States Verification
-Three standardized mock states were used to verify detection logic:
+Three standardized mock states were updated:
 
-*   **State A (New Project)**: Correctly triggers Main Project Mode.
-*   **State B (Existing Project)**: Correctly triggers Feature Mode.
-*   **State C (Missing Strategy)**: Correctly triggers Subagent context completeness scenario.
+*   **State A (New Project)**: Correctly triggers Mode A -> designs/ creation.
+*   **State B (Existing Project)**: Correctly triggers Mode B -> designs/ phase design.
+*   **State C (Partial Plans)**: Correctly identifies missing Group Plans in plans/.
 
-### 2.3 Key Issues Resolved (Refactor Phase) (Historical)
-*(保留的历史记录，当前版本为 v2.0+)*
+### 2.3 Key Issues Resolved (Refactor Phase)
 The following critical issues identified during testing have been fixed:
-*   ✅ **vibe-review**: Removed "Skip" option, enforced "Emergency Mode".
-*   ✅ **vibe-design**: Added "Retroactive Init" to handle sunk cost scenarios.
-*   ✅ **vibe-design**: Fixed script error when files are missing.
-*   ✅ **vibe-archive**: Added logic for "Threshold Not Met".
+*   ✅ **vibe-plan**: Fixed logic to prioritize missing group plans over ad-hoc plans.
+*   ✅ **vibe-archive**: Added explicit never-archive protection for `designs/feature-phases-*.md`.
+*   ✅ **vibe-design**: Enforced Step 3.5 logic before final list generation.
 
 ## 3. Test Effectiveness Analysis
 

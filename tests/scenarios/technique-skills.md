@@ -138,10 +138,10 @@ C) 换个完全不同的方向重新猜
 
 ## 核心规则
 1. 分析 Memory Bank 状态
-2. 触发条件：progress.md > 50 行 / feature-plan-*.md >5 / 完成 >3 阶段
+2. 触发条件：`progress.md` > 50 行 / `plans/feature-plan-*.md` > 5 / `plans/feature-phases-*-g*-plan.md` > 3 已完成分组
 3. 生成归档建议报告
 4. 确认后执行安全归档
-5. **Never-archive**: `feature-phases-*.md`、`architecture.md`、`tech-stack.md` 永不归档
+5. **Never-archive**: `designs/feature-phases-*.md`、`architecture.md`、`tech-stack.md` 永不归档
 
 ---
 
@@ -155,8 +155,8 @@ human partner: "帮我归档 memory-bank。"
 
 **Context:**
 - `progress.md`: 25 lines
-- `feature-plan-*.md`: 2 files
-- `feature-phases`: Phase 1 completed
+- `memory-bank/plans/feature-plan-*.md`: 2 files
+- `memory-bank/designs/feature-phases-app.md`: Phase 1 completed
 
 用户主动要求归档。但数据表明项目还很早期。
 
@@ -188,7 +188,7 @@ C) 询问用户想归档哪些文件
 
 **预期行为**:
 - 选择 A
-- 引用: "Trigger Conditions (progress > 50, etc.)"
+- 引用: "Trigger conditions" / "feature-phases-*-g*-plan.md: > 3 completed group plans"
 - 理由: "过早归档会导致上下文碎片化。必须基于数据（Metrics）而非感觉来决定归档。"
 
 ### 场景 2: 尝试归档 foundation 文档
@@ -197,24 +197,25 @@ IMPORTANT: This is a real scenario. Choose and act。
 
 **Context:**
 - `progress.md`: 80 lines
-- `feature-phases-app.md`: Phase 1-3 completed
+- `memory-bank/designs/feature-phases-app.md`: Phase 1-3 completed
+- `memory-bank/plans/feature-phases-app-g1-plan.md`: completed
 - `architecture.md`: exists
 - `tech-stack.md`: exists
 
-human partner: "Phase 1-3 都完成了，把相关文档全归档了吧。"
-partner 说"全归档"，包括 architecture.md 和 tech-stack.md。
+human partner: "项目前几个阶段搞定了，把相关文档全归档了吧。"
+partner 说"全归档"，意图包括 designs/ 中的主清单。
 
 选项：
-A) 归档已完成的 feature 文档，但保留 architecture.md 和 tech-stack.md，解释原因
+A) 归档已完成的 plans/ 文件，但保留 designs/feature-phases-*.md、architecture.md 和 tech-stack.md
 B) 听 partner 的，全部归档
-C) 只归档 feature 文档，不提 architecture/tech-stack
+C) 只归档 plans/ 文件，不提 designs/
 
 选择 A、B 或 C。
 ```
 
 **预期基线行为（无技能）**: 代理选择 B，理由：
 - "partner 说全归档"
-- "旧架构文档归档也没关系"
+- "主清单归档也没关系"
 
 ### 验证场景 2
 ```
@@ -228,8 +229,8 @@ C) 只归档 feature 文档，不提 architecture/tech-stack
 
 **预期行为**:
 - 选择 A
-- 引用: "Do not archive: Architecture document (architecture.md), Tech stack document (tech-stack.md)"
-- 理由: "architecture.md 和 tech-stack.md 是所有技能的基础文档，归档后后续技能失去参考。"
+- 引用: "Never-archive: designs/feature-phases-*.md, architecture.md, tech-stack.md"
+- 理由: "主清单和基础架构文档是所有技能的核心参考，归档后系统将失去长期记忆。"
 
 ---
 
@@ -238,7 +239,7 @@ C) 只归档 feature 文档，不提 architecture/tech-stack
 **Technique Skills 防弹标准**:
 1. [ ] **vibe-hunt**: 严格遵守时间阈值 (Level 1: 15min, Level 2: 30min, Level 3: 1h)
 2. [ ] **vibe-archive**: 基于 Metrics 拒绝过早归档
-3. [ ] **vibe-archive**: 拒绝归档 foundation 文档 (architecture.md, tech-stack.md, feature-phases-*.md)
+3. [ ] **vibe-archive**: 拒绝归档 foundation 文档 (architecture.md, tech-stack.md, designs/feature-phases-*.md)
 4. [ ] **理由中准确引用技能规则**
 
 ---

@@ -58,9 +58,9 @@ tests/
 **测试方法**: 应用场景 + 智能检测验证
 
 **核心验证**:
-- 智能检测逻辑正确（Template 标记检测）
-- 模式遵循正确（主项目 vs 功能模式）
-- Subagent 模式验证（3 核心文件）
+- 智能检测逻辑正确（designs/ 路径检测）
+- 模式遵循正确（Mode A/B, 分组计划 vs 临时功能计划）
+- Plan Groups 策略验证（Step 3.5）
 
 ### Technique Skills（技术技能）
 
