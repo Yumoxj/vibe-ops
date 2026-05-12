@@ -154,7 +154,7 @@ Subagent 不读取 memory-bank 文件——由 controller 提供完整信息。
 
 格式示例：
 ```
-## 2026-01-15
+## 2026-05-07
 - [x] Step 3: 添加用户认证端点
   - 决策：使用 JWT 而非 session token（无状态，扩展性更好）
   - 文件：src/auth/jwt.ts, src/routes/login.ts

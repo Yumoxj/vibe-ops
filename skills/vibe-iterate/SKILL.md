@@ -154,7 +154,7 @@ After both review stages pass, wait for user confirmation: ✅ pass / ❌ fail
 
 Format example:
 ```
-## 2026-01-15
+## 2026-05-07
 - [x] Step 3: Add user authentication endpoint
   - Decided: use JWT over session tokens (stateless, scales better)
   - Files: src/auth/jwt.ts, src/routes/login.ts
