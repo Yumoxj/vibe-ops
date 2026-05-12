@@ -1,6 +1,6 @@
 # Vibe Ops
 
-AI pair-programming protocols. 6 structured skills enforcing development discipline — design, plan, review, execution, debugging, and archiving — each with hard rules and escalation strategies.
+AI pair-programming protocols. 7 structured skills enforcing development discipline — design, plan, review, execution, debugging, cleanup, and archiving — each with hard rules and escalation strategies.
 
 [中文文档](README.zh-CN.md)
 
@@ -29,6 +29,7 @@ AI pair-programming protocols. 6 structured skills enforcing development discipl
 
 | Skill | Purpose | When to Use |
 |-------|---------|-------------|
+| **vibe-clean** | Code cleanup analysis via subagents | Dead code accumulation, duplicate logic, or periodic codebase health check |
 | **vibe-hunt** | Diagnosis-driven debugging | Encountering bugs, errors, unexpected behavior, or test failures |
 | **vibe-archive** | Memory Bank archiving | When memory-bank content grows large and needs context optimization |
 
@@ -39,8 +40,9 @@ AI pair-programming protocols. 6 structured skills enforcing development discipl
 ```
 Preparation & Design → Planning & Validation → Execution → Maintenance
          ↓                    ↓                  ↓            ↓
-    vibe-design          vibe-plan          vibe-iterate  vibe-hunt
-                         vibe-review                      vibe-archive
+    vibe-design          vibe-plan          vibe-iterate  vibe-clean
+                         vibe-review                      vibe-hunt
+                                                          vibe-archive
 ```
 
 ### Feature Development (3 phases)
@@ -81,6 +83,13 @@ skills/
 │       ├── implementer.md
 │       ├── spec-reviewer.md
 │       └── quality-reviewer.md
+├── vibe-clean/
+│   ├── agents/
+│   │   ├── dead-code-analyzer.md
+│   │   ├── simplification-analyzer.md
+│   │   └── duplicate-analyzer.md
+│   └── references/
+│       └── cleanup-catalog.md
 ├── vibe-hunt/
 └── vibe-archive/
 ```
@@ -118,3 +127,4 @@ This project draws inspiration from the following open-source projects:
 
 - [**Waza**](https://github.com/tw93/Waza) — Translating engineering habits into executable Claude Code skills. vibe-hunt's diagnosis-driven debugging and vibe-review's review process design are inspired by its `/hunt` and `/check` skills.
 - [**Vibe Coding CN**](https://github.com/2025Emma/vibe-coding-cn) — AI pair-programming guide in Chinese. The Memory Bank structure, plan-driven development workflow, and the "plan before code" methodology are core references for this project.
+- [**Everything Claude Code**](https://github.com/affaan-m/everything-claude-code) — Production-ready Claude Code agents and skills collection. vibe-clean's dead code detection, code simplification, and duplicate consolidation workflow are inspired by its `/refactor-clean` command and agent definitions.

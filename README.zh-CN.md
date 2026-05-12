@@ -1,6 +1,6 @@
 # Vibe Ops
 
-AI 结对编程的操作协议。6 个结构化技能，强制开发纪律——设计、计划、审查、执行、调试、归档，每个阶段有硬规则和升级策略。
+AI 结对编程的操作协议。7 个结构化技能，强制开发纪律——设计、计划、审查、执行、调试、清理、归档，每个阶段有硬规则和升级策略。
 
 ## 技能总览
 
@@ -27,6 +27,7 @@ AI 结对编程的操作协议。6 个结构化技能，强制开发纪律——
 
 | 技能 | 用途 | 何时使用 |
 |------|------|----------|
+| **vibe-clean** | 通过子代理进行代码清理分析 | 废代码积累、重复逻辑，或定期代码库健康检查 |
 | **vibe-hunt** | 诊断驱动的调试 | 遇到 bug、错误、异常行为或测试失败时 |
 | **vibe-archive** | Memory Bank 归档 | memory-bank 内容膨胀时，优化上下文 |
 
@@ -37,8 +38,9 @@ AI 结对编程的操作协议。6 个结构化技能，强制开发纪律——
 ```
 准备与设计 → 计划与确认 → 执行 → 维护
      ↓            ↓          ↓        ↓
- vibe-design  vibe-plan  vibe-iterate  vibe-hunt
-                vibe-review              vibe-archive
+ vibe-design  vibe-plan  vibe-iterate  vibe-clean
+                vibe-review              vibe-hunt
+                                         vibe-archive
 ```
 
 ### 功能开发流程（3 个阶段）
@@ -79,6 +81,13 @@ skills/
 │       ├── implementer.md
 │       ├── spec-reviewer.md
 │       └── quality-reviewer.md
+├── vibe-clean/
+│   ├── agents/
+│   │   ├── dead-code-analyzer.md
+│   │   ├── simplification-analyzer.md
+│   │   └── duplicate-analyzer.md
+│   └── references/
+│       └── cleanup-catalog.md
 ├── vibe-hunt/
 └── vibe-archive/
 ```
@@ -117,3 +126,4 @@ project-root/
 
 - [**Waza**](https://github.com/tw93/Waza) — 将工程师习惯转化为可执行的 Claude Code 技能。vibe-hunt 的诊断驱动调试、vibe-review 的审查流程设计受其 `/hunt` 和 `/check` 技能启发。
 - [**Vibe Coding CN**](https://github.com/2025Emma/vibe-coding-cn) — AI 结对编程中文指南。Memory Bank 结构、规划驱动的开发流程、以及"先规划后编码"的方法论是本项目的核心参考。
+- [**Everything Claude Code**](https://github.com/affaan-m/everything-claude-code) — 生产级 Claude Code agent 和技能集合。vibe-clean 的废代码检测、代码简化、重复代码合并流程受其 `/refactor-clean` 命令和 agent 定义启发。

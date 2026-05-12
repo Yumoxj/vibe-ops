@@ -4,7 +4,7 @@ Guidance for Claude Code (claude.ai/code) working in this repo.
 
 ## Project Overview
 
-Vibe Skills = 6 structured AI pair-programming skills enforcing dev discipline. Skills = Markdown files (`SKILL.md` + `agents/references/scripts`), loaded by Claude Code at runtime. No build step, no runtime deps, no compiled output.
+Vibe Skills = 7 structured AI pair-programming skills enforcing dev discipline. Skills = Markdown files (`SKILL.md` + `agents/references/scripts`), loaded by Claude Code at runtime. No build step, no runtime deps, no compiled output.
 
 ## Commands
 
@@ -17,7 +17,7 @@ No build/lint/test commands. Documentation-only skill repo.
 ### Skill Lifecycle Flow
 
 ```
-vibe-design → vibe-plan → vibe-review → vibe-iterate → vibe-hunt / vibe-archive
+vibe-design → vibe-plan → vibe-review → vibe-iterate → vibe-clean / vibe-hunt / vibe-archive
 ```
 
 Each skill invoked as `/vibe-<name>`, operates on shared `memory-bank/` in target project.
@@ -47,7 +47,7 @@ memory-bank/
 |------|-----------|---------|
 | `architecture.md` | vibe-design | Single source of truth for project architecture (never archived) |
 | `tech-stack.md` | vibe-design | Single source of truth for technology choices (never archived) |
-| `designs/feature-design-*.md` | vibe-design | Feature design document with phases table, plan groups, and per-phase design sections (conditionally archivable via vibe-archive) |
+| `designs/feature-design-*.md` | vibe-design / vibe-clean | Feature design document with phases table, plan groups, and per-phase design sections (conditionally archivable via vibe-archive) |
 | `plans/feature-design-*-g*-plan.md` | vibe-plan | Per-group implementation plan with verification criteria |
 | `plans/feature-plan-*.md` | vibe-plan | Ad-hoc feature-specific implementation plan |
 | `progress.md` | vibe-iterate | Execution log (date, step, key changes) |
@@ -80,6 +80,24 @@ Expert activation rules in `references/persona-catalog.md`.
 ### vibe-hunt: Hypothesis-Driven Debugging
 
 Requires specific, verifiable root cause statement before touching code. Hard stops: fix doesn't resolve symptom → start over; 3 failed hypotheses → escalate to user. Escalation levels in SKILL.md (Level 1–3).
+
+### vibe-clean: Depth-Based Cleanup Analysis
+
+Read-only analysis skill. Dispatches subagent analyzers (defined in `skills/vibe-clean/agents/`) based on depth:
+
+- **simplification-analyzer.md** — Identifies code simplification opportunities (Surface+)
+- **dead-code-analyzer.md** — Detects unused code via tooling (Standard+)
+- **duplicate-analyzer.md** — Finds duplicate/near-duplicate patterns (Deep only)
+
+Three depth levels by target size:
+
+| Depth | Lines | Agents |
+|-------|-------|--------|
+| Surface | < 50 | simplification-analyzer only |
+| Standard | 50–200 | + dead-code-analyzer |
+| Deep | 200+ | + duplicate-analyzer |
+
+Outputs `feature-design-clean-*.md` to `memory-bank/designs/`, then feeds into `/vibe-plan` → `/vibe-iterate`. Activation rules in `references/cleanup-catalog.md`.
 
 ## Dual-Language Structure
 
