@@ -41,6 +41,7 @@ When these thoughts appear, stop and reassess:
 | "Probably the same as last time" | Treating new symptoms as a known pattern | Re-read the execution path from scratch. |
 | "Works on my machine" | Environment differences ARE the bug | List every environment difference before judging. |
 | "One more restart should fix it" | Avoiding the error message | Read the last error verbatim. No more than two restarts without new evidence. |
+| "Finally, a different error!" | After 1h of random changes, new symptoms are coincidence, not progress | If Level 3 threshold is reached, save state and start fresh regardless of recent changes. |
 
 ---
 
@@ -85,7 +86,9 @@ When the standard diagnostic process stalls, escalate progressively:
 - Deep analysis: code structure, how it works, key components
 - Report known/ruled out/unknown to user
 
-### Level 3: Severely Stuck (1h+ no progress)
+### Level 3: Severely Stuck (1h+ total debugging time)
+The 1h threshold is absolute — it measures total time spent, not time since last "signal." After 1 hour of debugging, your mental model is unreliable. A "new error" after a series of random changes is coincidental variation, not progress.
+
 - First execute `git stash` to save current changes
 - Use AskUserQuestion to confirm whether to `git reset --hard` (note: stash has saved changes)
 - Start a new `/new` session

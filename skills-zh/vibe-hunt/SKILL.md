@@ -41,6 +41,7 @@ description: "Use when encountering bugs, errors, unexpected behavior, or failin
 | "可能和之前的问题一样" | 把新症状当成已知模式 | 从头重新读执行路径。 |
 | "我机器上没问题" | 环境差异就是 bug | 列举每个环境差异再判断。 |
 | "再重启一次应该就好了" | 在回避错误信息 | 逐字读最后的错误。重启不超过两次且无新证据。 |
+| "终于出现不同的错误了！" | 调试 1h 后的随机修改产生新症状是巧合，不是进展 | 如果已达到 Level 3 阈值，无论最近的任何变化，保存状态并重新开始。 |
 
 ---
 
@@ -85,7 +86,9 @@ description: "Use when encountering bugs, errors, unexpected behavior, or failin
 - 深度分析：代码结构、工作原理、关键组件
 - 向用户汇报已知/已排除/未知
 
-### Level 3：严重卡壳（1h+ 无进展）
+### Level 3：严重卡壳（累计调试 1 小时以上）
+1 小时阈值是绝对的——衡量的是总调试时间，而非距上次"信号"的时间。调试 1 小时后，你的心智模型已经不可靠。一系列随机修改后出现的"新错误"是巧合变异，不是进展。
+
 - 先执行 `git stash` 暂存当前修改
 - 使用 AskUserQuestion 确认是否 `git reset --hard`（提示：stash 已保存修改）
 - 新建 `/new` 会话

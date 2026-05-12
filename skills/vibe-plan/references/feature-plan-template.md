@@ -4,14 +4,14 @@ This document contains the feature plan templates used by the `vibe-plan` skill.
 
 ---
 
-## Group Plan Template: feature-phases-[name]-g[N]-plan.md
+## Group Plan Template: feature-design-[name]-g[N]-plan.md
 
 ```markdown
 # Implementation Plan: Group [N]
 
 > Plan Group: G[N]
 > Phases: Phase X, Phase Y
-> Source: feature-phases-[name].md
+> Source: feature-design-[name].md
 > Status: Pending / In Progress / Completed
 
 ---

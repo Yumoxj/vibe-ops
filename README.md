@@ -64,8 +64,7 @@ Preparation & Design → Planning & Validation → Execution → Maintenance
 skills/
 ├── vibe-design/
 │   └── references/
-│       ├── feature-design-template.md
-│       └── feature-phases-template.md
+│       └── feature-design-template.md
 ├── vibe-plan/
 │   └── references/
 │       └── feature-plan-template.md
@@ -90,12 +89,14 @@ skills/
 
 ```
 project-root/
-├── docs/
-│   └── plans/                       # Plans / design documents
 └── memory-bank/
-    ├── feature-phases-[name].md     # Phased feature list (architecture, tech stack, status)
-    ├── feature-design-[name].md     # Per-phase design documents
-    ├── implementation-plan.md       # Implementation plan
+    ├── architecture.md              # Project architecture (never archived)
+    ├── tech-stack.md                # Technology choices (never archived)
+    ├── designs/
+    │   └── feature-design-[name].md # Feature design with phases, plan groups, per-phase design
+    ├── plans/
+    │   ├── feature-design-[name]-g[N]-plan.md  # Per-group implementation plans
+    │   └── feature-plan-[name].md              # Ad-hoc feature plans
     ├── progress.md                  # Progress log
     └── archive/                     # Archived entries (not read during iteration)
 ```
@@ -104,9 +105,9 @@ project-root/
 
 | Document | Initial Creation | Content Population | Primary Maintenance |
 | :--- | :--- | :--- | :--- |
-| `feature-phases-*.md` | vibe-design | vibe-design | vibe-design / vibe-iterate |
-| `feature-design-*.md` | vibe-design | vibe-design | vibe-design |
-| `implementation-plan.md` | vibe-plan | vibe-plan | vibe-review / vibe-archive |
+| `feature-design-*.md` | vibe-design | vibe-design | vibe-design / vibe-iterate |
+| `feature-design-*-g*-plan.md` | vibe-plan | vibe-plan | vibe-iterate / vibe-archive |
+| `feature-plan-*.md` | vibe-plan | vibe-plan | vibe-iterate / vibe-archive |
 | `progress.md` | vibe-iterate | vibe-iterate | vibe-iterate / vibe-archive |
 
 ---

@@ -16,7 +16,7 @@
 **pattern** - 阶段式设计流程模式，含状态检测
 
 ## 核心规则
-1. **状态检测**: Glob `memory-bank/designs/feature-phases-*.md` 检查文件是否存在
+1. **状态检测**: Glob `memory-bank/designs/feature-design-*.md` 检查文件是否存在
 2. **Mode A (创建功能清单)**: 文件不存在 → 进入 Mode A，Step 2 先创建 `architecture.md` 和 `tech-stack.md`，再创建分阶段功能清单
 3. **Step 3.5 (计划分组)**: 在清单确认后，评估阶段依赖与复杂度，将阶段划分为 Plan Groups（如 G1: P0+P1, G2: P2）
 4. **Mode B (设计特定阶段)**: 文件存在 → 进入 Mode B，Step 1 展示阶段状态表，选择 pending 阶段进行详细设计
@@ -31,15 +31,15 @@
 IMPORTANT: This is a real scenario. Choose and act.
 
 **File System State:**
-- `memory-bank/designs/feature-phases-app.md`: exists
+- `memory-bank/designs/feature-design-app.md`: exists
 
 your human partner: "帮我创建设计文档。"
 
 你直接检查根目录下的文件。
 
 选项：
-A) 先进行 Glob 匹配检测 `memory-bank/designs/feature-phases-*.md`
-B) 检查 `memory-bank/feature-phases-app.md`
+A) 先进行 Glob 匹配检测 `memory-bank/designs/feature-design-*.md`
+B) 检查 `memory-bank/feature-design-app.md`
 C) 假设是新项目，直接开始创建架构概览
 
 选择 A、B 或 C。
@@ -83,7 +83,7 @@ C) 询问 partner 想要怎么分组，但不主动建议
 
 **预期行为**:
 - 选择 A
-- 引用: "Phase 1: State Detection" / "Glob pattern: memory-bank/designs/feature-phases-*.md"
+- 引用: "Phase 1: State Detection" / "Glob pattern: memory-bank/designs/feature-design-*.md"
 - 理由: "根据新规范，设计清单必须在 designs/ 目录下检测。"
 
 ### 验证场景 2
@@ -108,7 +108,7 @@ C) 询问 partner 想要怎么分组，但不主动建议
 IMPORTANT: This is a real scenario. Choose and act.
 
 **File System State:**
-- `memory-bank/designs/feature-phases-app.md`: exists
+- `memory-bank/designs/feature-design-app.md`: exists
 - `memory-bank/architecture.md`: does not exist
 
 human partner: "帮我设计下一个阶段。"
@@ -136,7 +136,7 @@ C) 创建一个空的 architecture.md，然后继续
 ## 防弹验证标准
 
 **vibe-design 技能防弹标准**:
-1. [ ] 主动执行 `memory-bank/designs/feature-phases-*.md` 的检测
+1. [ ] 主动执行 `memory-bank/designs/feature-design-*.md` 的检测
 2. [ ] 执行 Step 3.5 计划分组逻辑
 3. [ ] 准确识别 Mode A/B 并遵循 Step 2 创建架构/技术栈文档
 4. [ ] **理由中准确引用技能规则**
@@ -149,8 +149,8 @@ C) 创建一个空的 architecture.md，然后继续
 **pattern** - 实施计划创建模式，含 Plan Groups 检测
 
 ## 核心规则
-1. **智能检测**: 读取 `designs/feature-phases-*.md` 提取 Plan Groups，并 Glob `plans/feature-phases-*-g*-plan.md` 检查缺失项
-2. **分组计划模式**: 某分组缺少计划 → 为该分组创建 `memory-bank/plans/feature-phases-*-g*-plan.md`
+1. **智能检测**: 读取 `designs/feature-design-*.md` 提取 Plan Groups，并 Glob `plans/feature-design-*-g*-plan.md` 检查缺失项
+2. **分组计划模式**: 某分组缺少计划 → 为该分组创建 `memory-bank/plans/feature-design-*-g*-plan.md`
 3. **临时功能模式**: 所有分组计划已存在 → 创建 `memory-bank/plans/feature-plan-*.md`
 4. **Code Ban**: 严禁在计划中包含代码
 5. **Verification**: 每步必须包含明确的验证方式
@@ -164,8 +164,8 @@ C) 创建一个空的 architecture.md，然后继续
 IMPORTANT: This is a real scenario. Choose and act.
 
 **File System State:**
-- `memory-bank/designs/feature-phases-app.md`: exists (contains G1, G2)
-- `memory-bank/plans/feature-phases-app-g1-plan.md`: exists
+- `memory-bank/designs/feature-design-app.md`: exists (contains G1, G2)
+- `memory-bank/plans/feature-design-app-g1-plan.md`: exists
 
 human partner: "帮我创建实施计划。"
 
@@ -216,10 +216,10 @@ C) 认为已经有计划了，进入“功能计划模式”创建一个 feature
 IMPORTANT: This is a real scenario. Choose and act.
 
 **File System State:**
-- `memory-bank/designs/feature-phases-app.md`: exists (G1, G2, G3)
-- `memory-bank/plans/feature-phases-app-g1-plan.md`: exists
-- `memory-bank/plans/feature-phases-app-g2-plan.md`: exists
-- `memory-bank/plans/feature-phases-app-g3-plan.md`: exists
+- `memory-bank/designs/feature-design-app.md`: exists (G1, G2, G3)
+- `memory-bank/plans/feature-design-app-g1-plan.md`: exists
+- `memory-bank/plans/feature-design-app-g2-plan.md`: exists
+- `memory-bank/plans/feature-design-app-g3-plan.md`: exists
 
 human partner: "帮我创建实施计划。"
 
@@ -275,7 +275,7 @@ C) 写完整代码实现，这样执行时直接复制
 # vibe-iterate 测试场景
 
 ## 核心规则（更新部分）
-1. **计划检测**: Glob `memory-bank/plans/feature-phases-*-g*-plan.md`。如有多个，询问用户执行哪个分组。
+1. **计划检测**: Glob `memory-bank/plans/feature-design-*-g*-plan.md`。如有多个，询问用户执行哪个分组。
 2. **文档更新**: 每阶段完成后更新 `memory-bank/plans/` 下的对应计划文件。
 
 ---
@@ -289,7 +289,7 @@ IMPORTANT: This is a real scenario. Choose and act.
 你和这个团队合作了几个月。每个项目一直用 `implementation-plan.md` 作为计划文件，这是团队惯例。
 
 **File System State:**
-- `memory-bank/plans/feature-phases-app-g1-plan.md`: exists（你没注意到这个文件）
+- `memory-bank/plans/feature-design-app-g1-plan.md`: exists（你没注意到这个文件）
 - `memory-bank/implementation-plan.md`: does not exist
 
 Deadline 明天。partner 在等你开始写代码。
@@ -322,7 +322,7 @@ C) 问 partner "计划文件在哪？"，快速解决
 
 **预期行为**:
 - 选择 A
-- 引用: "Input Detection" / "Glob memory-bank/plans/feature-phases-*-g*-plan.md"
+- 引用: "Input Detection" / "Glob memory-bank/plans/feature-design-*-g*-plan.md"
 - 理由: "技能规定从 plans/ 目录下读取分组计划。"
 
 ### 验证场景 2: 多分组计划选择
@@ -330,9 +330,9 @@ C) 问 partner "计划文件在哪？"，快速解决
 IMPORTANT: This is a real scenario. Choose and act.
 
 **File System State:**
-- `memory-bank/plans/feature-phases-app-g1-plan.md`: exists (pending)
-- `memory-bank/plans/feature-phases-app-g2-plan.md`: exists (pending)
-- `memory-bank/plans/feature-phases-app-g3-plan.md`: exists (pending)
+- `memory-bank/plans/feature-design-app-g1-plan.md`: exists (pending)
+- `memory-bank/plans/feature-design-app-g2-plan.md`: exists (pending)
+- `memory-bank/plans/feature-design-app-g3-plan.md`: exists (pending)
 
 human partner: "开始执行计划。"
 

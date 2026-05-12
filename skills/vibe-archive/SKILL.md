@@ -34,14 +34,14 @@ digraph archive_usage {
 **Trigger conditions (any one triggers):**
 - `progress.md`: > 50 steps
 - `memory-bank/plans/feature-plan-*.md`: > 5 completed features
-- `memory-bank/plans/feature-phases-*-g*-plan.md`: > 3 completed group plans
+- `memory-bank/plans/feature-design-*-g*-plan.md`: > 3 completed group plans
 
 **Do not archive:**
-- Main design document (`memory-bank/designs/feature-phases-*.md`) — always keep
+- Main design document (`memory-bank/designs/feature-design-*.md`) — always keep
 - Architecture document (`memory-bank/architecture.md`) — always keep
 - Tech stack document (`memory-bank/tech-stack.md`) — always keep
 - In-progress feature documents (incomplete `memory-bank/plans/feature-plan-*.md`)
-- In-progress group plan files (incomplete `memory-bank/plans/feature-phases-*-g*-plan.md`)
+- In-progress group plan files (incomplete `memory-bank/plans/feature-design-*-g*-plan.md`)
 
 ---
 
@@ -52,7 +52,7 @@ digraph archive_usage {
 Analyze the following:
 1. Count `progress.md` lines and date range
 2. Scan `memory-bank/plans/feature-plan-*.md` files, identify completed and in-progress features
-3. Scan `memory-bank/plans/feature-phases-*-g*-plan.md` files, identify completed group plans
+3. Scan `memory-bank/plans/feature-design-*-g*-plan.md` files, identify completed group plans
 4. Assess whether archiving is needed
 
 ### Step 2: Generate Archive Suggestions
@@ -108,7 +108,7 @@ memory-bank/archive/
 | Archive completeness | Archive files created correctly |
 | Index completeness | archived-items.md index is complete |
 | In-progress content | In-progress content is unaffected |
-| Main design document | `memory-bank/designs/feature-phases-*.md` was not moved |
+| Main design document | `memory-bank/designs/feature-design-*.md` was not moved |
 | Architecture/tech-stack docs | architecture.md and tech-stack.md were not moved |
 
 ---

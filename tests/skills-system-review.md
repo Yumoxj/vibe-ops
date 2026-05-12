@@ -41,7 +41,7 @@ Three standardized mock states were updated:
 ### 2.3 Key Issues Resolved (Refactor Phase)
 The following critical issues identified during testing have been fixed:
 *   ✅ **vibe-plan**: Fixed logic to prioritize missing group plans over ad-hoc plans.
-*   ✅ **vibe-archive**: Added explicit never-archive protection for `designs/feature-phases-*.md`.
+*   ✅ **vibe-archive**: Added explicit never-archive protection for `designs/feature-design-*.md`.
 *   ✅ **vibe-design**: Enforced Step 3.5 logic before final list generation.
 
 ## 3. Test Effectiveness Analysis

@@ -32,10 +32,9 @@ memory-bank/
 ├── tech-stack.md            # Technology choices (never archived)
 ├── progress.md              # Execution log
 ├── designs/
-│   ├── feature-phases-*.md  # Phased feature list with Plan Groups
-│   └── feature-design-*.md  # Per-phase design specs
+│   └── feature-design-*.md  # Feature design with phases, plan groups, and per-phase design
 ├── plans/
-│   ├── feature-phases-*-g*-plan.md  # Per-group implementation plans
+│   ├── feature-design-*-g*-plan.md  # Per-group implementation plans
 │   └── feature-plan-*.md            # Ad-hoc feature plans
 └── archive/                 # Completed items (never read by vibe-iterate)
 ```
@@ -44,14 +43,13 @@ memory-bank/
 |------|-----------|---------|
 | `architecture.md` | vibe-design | Single source of truth for project architecture (never archived) |
 | `tech-stack.md` | vibe-design | Single source of truth for technology choices (never archived) |
-| `designs/feature-phases-*.md` | vibe-design | Phased feature list with Plan Groups section and status tracking |
-| `designs/feature-design-*.md` | vibe-design | Per-phase design specs |
-| `plans/feature-phases-*-g*-plan.md` | vibe-plan | Per-group implementation plan with verification criteria |
+| `designs/feature-design-*.md` | vibe-design | Feature design document with phases table, plan groups, and per-phase design sections |
+| `plans/feature-design-*-g*-plan.md` | vibe-plan | Per-group implementation plan with verification criteria |
 | `plans/feature-plan-*.md` | vibe-plan | Ad-hoc feature-specific implementation plan |
 | `progress.md` | vibe-iterate | Execution log (date, step, key changes) |
 | `archive/` | vibe-archive | Completed items (never read by vibe-iterate) |
 
-**Plan file naming:** `feature-phases-[name]-g[N]-plan.md` in `plans/` — one plan file per Plan Group defined in `designs/feature-phases-*.md`. Groups are evaluated by vibe-design Step 3.5 based on phase coupling and complexity.
+**Plan file naming:** `feature-design-[name]-g[N]-plan.md` in `plans/` — one plan file per Plan Group defined in `designs/feature-design-*.md`. Groups are evaluated by vibe-design based on phase coupling and complexity.
 
 ### vibe-iterate: Controller + Subagent Pattern
 

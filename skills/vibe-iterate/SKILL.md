@@ -26,7 +26,7 @@ Core rules:
 
 **Use cases:**
 - Execute implementation plans created by /vibe-plan
-- Complete steps in group plans (`feature-phases-*-g*-plan.md`) or feature plans (`feature-plan-*.md`) one at a time
+- Complete steps in group plans (`feature-design-*-g*-plan.md`) or feature plans (`feature-plan-*.md`) one at a time
 
 **Not for:**
 - Design documents (use /vibe-design)
@@ -40,17 +40,23 @@ Core rules:
 
 | Input | File |
 |-------|------|
-| Group implementation plan | `memory-bank/plans/feature-phases-*-g*-plan.md` |
+| Group implementation plan | `memory-bank/plans/feature-design-*-g*-plan.md` |
 | Feature implementation plan | `memory-bank/plans/feature-plan-*.md` |
 
 **Detection logic:**
-1. Glob `memory-bank/plans/feature-phases-*-g*-plan.md` → list all group plans
+1. Glob `memory-bank/plans/feature-design-*-g*-plan.md` → list all group plans
 2. If multiple group plans exist, ask user which group to execute
 3. If no group plans, check `memory-bank/plans/feature-plan-*.md`
 
 If unclear, use AskUserQuestion to confirm.
 
-### 2. Confirm Commit Strategy
+### 2. Read Foundation Documents
+
+Before execution, read `memory-bank/architecture.md` and `memory-bank/tech-stack.md`. Both must be read and their key constraints noted — pass these constraints to each subagent dispatch.
+
+If either file is missing, warn the user and suggest running /vibe-design to create them first. Do not proceed without reading both files.
+
+### 3. Confirm Commit Strategy
 
 Before execution, ask the user to choose their preferred Git commit frequency:
 1. **All-at-once**: Complete all planned tasks before making a single final commit.
@@ -59,15 +65,16 @@ Before execution, ask the user to choose their preferred Git commit frequency:
 
 *Hint: To ensure a smooth experience without frequent interruptions, recommend **Phase-by-phase** or **All-at-once** by default.*
 
-### 3. Iteration Strategy (Inline Rules)
+### 4. Iteration Strategy (Inline Rules)
 
 | Strategy | Rule |
 |----------|------|
 | progress.md | Update after each step, record date, step, key changes |
 | Plan document update | After each phase, update group plan file or `feature-plan-*.md`, mark completed items |
-| Design document update | Only update `memory-bank/designs/feature-phases-*.md` for architecture changes |
+| Group completion update | After ALL steps in a group are complete: (1) update `feature-design-*.md` Phases table status for phases in this group (designing → done), (2) update plan document Status to Completed |
+| Design document update | Only update `memory-bank/designs/feature-design-*.md` for architecture changes (besides group completion updates) |
 | Architecture/tech-stack check | After each phase, compare changes against `architecture.md` and `tech-stack.md`, suggest updates if affected (advisory, not blocking) |
-| Status tracking | After completing a phase, update phase status in `feature-phases-*.md` (designing → done) and `feature-design-*.md` (pending → done) |
+| Status tracking | Phase status updates happen at group completion (see Group completion update rule) |
 | Git commits | Execute according to the user's chosen **Commit Strategy** (All-at-once, Phase-by-phase, or Step-by-step) |
 | Archive | Do not read records under `memory-bank/archive/` |
 | Verification | After each step, wait for user confirmation ✅/❌ |
@@ -106,6 +113,7 @@ Provide the implementer subagent with:
 - Relevant design document summary
 - File paths to modify
 - Verification criteria
+- Key constraints from `architecture.md` and `tech-stack.md`
 
 **Handling Subagent Status:**
 
@@ -156,13 +164,24 @@ Format example:
 - Update current group plan file in `memory-bank/plans/` or `feature-plan-*.md`
 - Mark all steps in that phase as completed (e.g., change `[ ]` to `[x]`)
 - **Architecture/tech-stack consistency check:**
-  1. Read `memory-bank/architecture.md` and `memory-bank/tech-stack.md` (skip if they don't exist)
+  1. Read `memory-bank/architecture.md` and `memory-bank/tech-stack.md`
   2. Compare with the actual changes made in this phase
   3. If changes affect architecture, components, tech choices, or directory structure:
      - Use AskUserQuestion to suggest updates (e.g., "This phase added a new component. Should architecture.md be updated?")
      - Do not block execution — this is advisory only
   4. If user agrees, update the relevant document and record in its Changes Log section
   5. Update the `Last reviewed` date in both documents regardless of changes
+
+**After each group completion:**
+- Update `memory-bank/designs/feature-design-*.md`:
+  - Change Phases table status for all phases in this group: `designing` → `done`
+  - Example:
+    ```
+    | Phase 0 | NPY Reader | ... | done |
+    | Phase 1 | EmbeddingStore | ... | done |
+    | Phase 2 | Prefill Builder | ... | designing |
+    ```
+- Update plan document header Status: `pending` → `Completed`
 
 ### 6. Git Commit Confirmation
 
@@ -181,6 +200,7 @@ Return to Step 1 and continue until all steps are complete.
 
 | Mistake | Consequence | Correct approach |
 |---------|-------------|------------------|
+| Skip reading architecture/tech-stack | Subagent unaware of project constraints | Must read both files before execution and pass constraints to subagents |
 | Skip clarification | Wrong direction | Must clarify questions first |
 | Auto push | Security risk | Never execute git push |
 | Continue without review | Introduces defects | Must complete two-stage review |
@@ -188,12 +208,13 @@ Return to Step 1 and continue until all steps are complete.
 | Let subagent read plan files | Context waste | Controller provides complete text |
 | Skip spec, go straight to quality | Wrong review order | Spec compliance first, then quality |
 | Retry same model when subagent is blocked | Repeated failures | Switch model or split task |
+| Forget group completion update | Feature-design status goes stale | Must update Phases table and plan Status after group completes |
 
 ---
 
 ## Completion Criteria
 
-- **Group plan**: All steps in current `memory-bank/plans/feature-phases-*-g*-plan.md` are complete
+- **Group plan**: All steps in current `memory-bank/plans/feature-design-*-g*-plan.md` are complete
 - **Feature development**: All steps in `memory-bank/plans/feature-plan-*.md` are complete
 
 After completion, suggest user invoke `/vibe-review` for final review.

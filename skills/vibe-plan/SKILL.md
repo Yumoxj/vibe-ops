@@ -1,6 +1,6 @@
 ---
 name: vibe-plan
-description: "Use when creating implementation plans from design documents. Outputs to memory-bank as feature-phases-[name]-g[N]-plan.md or feature-plan-*.md."
+description: "Use when creating implementation plans from design documents. Outputs to memory-bank as feature-design-[name]-g[N]-plan.md or feature-plan-*.md."
 ---
 
 # Vibe Plan
@@ -16,7 +16,7 @@ Core principles:
 - **Code ban** — Plans containing code cause AI to copy instead of understand
 
 Smart detection:
-- `feature-phases-*-g*-plan.md` not found for a group → Group plan mode (create plan for that group)
+- `feature-design-*-g*-plan.md` not found for a group → Group plan mode (create plan for that group)
 - All group plans exist → Ad-hoc feature plan mode (create standalone feature plan)
 
 ```dot
@@ -25,7 +25,7 @@ digraph plan_overview {
     node [fontname="Arial", fontsize=12];
 
     start [shape=ellipse, label="User invokes /vibe-plan"];
-    phase1 [shape=box, label="Phase 1: Mode Detection\n(Glob feature-phases-*-g*-plan.md)"];
+    phase1 [shape=box, label="Phase 1: Mode Detection\n(Glob feature-design-*-g*-plan.md)"];
     phase2 [shape=box, label="Phase 2: Interactive Planning\n(AskUserQuestion)"];
     phase3 [shape=ellipse, label="Phase 3: Next Steps"];
 
@@ -40,8 +40,8 @@ digraph plan_overview {
 ## When to Use
 
 **Use cases:**
-- Main project implementation plan: create from project design document
-- Feature implementation plan: create implementation steps from feature design document
+- Main project implementation plan: create from feature design document
+- Feature implementation plan: create implementation steps from a specific phase design
 
 **Not for:**
 - Creating design documents (use /vibe-design)
@@ -60,27 +60,26 @@ digraph plan_overview {
 ## Phase 1: Detect Plan Context
 
 ```bash
-Glob pattern: "memory-bank/plans/feature-phases-*-g*-plan.md"
-Glob pattern: "memory-bank/designs/feature-phases-*.md"
+Glob pattern: "memory-bank/plans/feature-design-*-g*-plan.md"
+Glob pattern: "memory-bank/designs/feature-design-*.md"
 ```
 
-**Step 1:** Read `feature-phases-*.md` to extract Plan Groups.
+**Step 1:** Read `feature-design-*.md` to extract Plan Groups section.
 
-**Step 2:** Check which groups already have plan files. For each group, check if `feature-phases-[name]-g[N]-plan.md` exists.
+**Step 2:** Check which groups already have plan files. For each group, check if `feature-design-[name]-g[N]-plan.md` exists.
 
 | Detection result | Mode | Action |
 |------------------|------|--------|
 | Group(s) without plan files | **Group plan mode** | Enter Phase 2.1 for each missing group |
 | All groups have plans | **Ad-hoc feature plan mode** | Enter Phase 2.2 |
-| No `feature-phases-*.md` found | **Ask user** | Use AskUserQuestion to confirm intent |
-| No `feature-phases-*.md` found | **Ask user** | Use AskUserQuestion to confirm intent |
+| No `feature-design-*.md` found | **Ask user** | Use AskUserQuestion to confirm intent |
 
 ```dot
 digraph detect_flow {
     rankdir=TB;
     node [fontname="Arial", fontsize=12];
 
-    check [shape=diamond, label="feature-phases-*.md\nexists?"];
+    check [shape=diamond, label="feature-design-*.md\nexists?"];
     groups [shape=diamond, label="All groups\nhave plans?"];
     group_mode [shape=box, label="Group plan mode\n(Phase 2.1)"];
     adhoc [shape=box, label="Ad-hoc feature plan\n(Phase 2.2)"];
@@ -94,8 +93,8 @@ digraph detect_flow {
 ```
 
 **Naming convention:**
-- Group plans: `memory-bank/plans/feature-phases-[name]-g[N]-plan.md`
-- Example: `feature-phases-messaging.md` G1 → `feature-phases-messaging-g1-plan.md`
+- Group plans: `memory-bank/plans/feature-design-[name]-g[N]-plan.md`
+- Example: `feature-design-messaging.md` G1 → `feature-design-messaging-g1-plan.md`
 
 ---
 
@@ -112,10 +111,9 @@ Interaction rules:
 ### 2.1 Group Plan Mode
 
 **Read context:**
-- `memory-bank/designs/feature-phases-*.md` (Plan Groups section + phase details)
-- `memory-bank/designs/feature-design-*.md` for phases in this group (if exist)
-- `memory-bank/architecture.md` (if exists)
-- `memory-bank/tech-stack.md` (if exists)
+- `memory-bank/designs/feature-design-*.md` (Plan Groups section + Phases table + Phase Designs)
+- `memory-bank/architecture.md`
+- `memory-bank/tech-stack.md`
 
 For each group missing a plan, explore these dimensions one by one:
 
@@ -124,13 +122,13 @@ For each group missing a plan, explore these dimensions one by one:
 3. **Steps breakdown** — Break each phase in the group into verifiable concrete steps
 4. **Step dependencies** — Which steps have sequential dependencies across phases
 
-**Create document:** `memory-bank/plans/feature-phases-[name]-g[N]-plan.md`
+**Create document:** `memory-bank/plans/feature-design-[name]-g[N]-plan.md`
 
 **Document header:**
 ```markdown
 > Plan Group: G[N]
 > Phases: Phase X, Phase Y
-> Source: feature-phases-[name].md
+> Source: feature-design-[name].md
 > Status: pending
 ```
 
@@ -144,7 +142,7 @@ For each group missing a plan, explore these dimensions one by one:
 
 **Iteration strategy (inline rules):**
 - After each phase within the group is complete, update `memory-bank/progress.md`
-- Only update `memory-bank/designs/feature-phases-*.md` when architecture changes
+- After each group is complete, update `memory-bank/designs/feature-design-*.md` Phases table status
 - At the end of each phase, ask user whether to git commit
 
 **Validation:**
@@ -163,10 +161,9 @@ For each group missing a plan, explore these dimensions one by one:
 For: all group plans already exist, user wants an additional standalone feature plan.
 
 **Read context:**
-- Corresponding `memory-bank/designs/feature-design-*.md`
-- `memory-bank/designs/feature-phases-*.md` (to understand existing phase breakdown)
-- `memory-bank/architecture.md` (if exists)
-- `memory-bank/tech-stack.md` (if exists)
+- Corresponding `memory-bank/designs/feature-design-*.md` (relevant Phase Design section)
+- `memory-bank/architecture.md`
+- `memory-bank/tech-stack.md`
 
 Explore one by one:
 1. **Feature goal confirmation** — What should this feature accomplish

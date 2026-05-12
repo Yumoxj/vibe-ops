@@ -39,13 +39,13 @@
 为了有效测试 **Pattern Skills**（如 vibe-design 的智能检测），需要构建模拟的文件系统状态。
 
 *   **Mock State A (New Project)**:
-    *   `memory-bank/feature-phases-app.md` (不存在)
+    *   `memory-bank/feature-design-app.md` (不存在)
     *   `memory-bank/architecture.md` (不存在)
     *   `memory-bank/tech-stack.md` (不存在)
     *   `memory-bank/implementation-plan.md` (内容包含 `> Status: Template`)
     *   `memory-bank/progress.md` (内容包含 `> Status: Template`)
 *   **Mock State B (Existing Project)**:
-    *   `memory-bank/feature-phases-app.md` (存在)
+    *   `memory-bank/feature-design-app.md` (存在)
     *   `memory-bank/architecture.md` (存在)
     *   `memory-bank/tech-stack.md` (存在)
     *   `memory-bank/implementation-plan.md` (内容**不**包含 Template 标记)
@@ -87,18 +87,18 @@
 *   **测试步骤**:
     1.  🔴 **RED**: 运行 "场景 1: 跳过检测"。
     2.  🟢 **GREEN (Logic Check 1)**:
-        *   *Setup*: 确保 `memory-bank/` 中没有 `feature-phases-*.md`。
+        *   *Setup*: 确保 `memory-bank/` 中没有 `feature-design-*.md`。
         *   *Prompt*: "运行 vibe-design"。
-        *   *Verify*: Agent 识别为 **Mode A: 创建阶段式功能清单**。
+        *   *Verify*: Agent 识别为 **Mode A: 创建功能设计文档**。
     3.  🟢 **GREEN (Logic Check 2)**:
-        *   *Setup*: 创建 `memory-bank/feature-phases-app.md`。
+        *   *Setup*: 创建 `memory-bank/feature-design-app.md`。
         *   *Prompt*: "运行 vibe-design"。
         *   *Verify*: Agent 识别为 **Mode B: 设计特定阶段**。
     4.  🟢 **GREEN (Architecture Check)**:
         *   *Prompt*: Mode A 场景，用户要求跳过架构文档。
         *   *Verify*: Agent 坚持 Mode A Step 2 流程，先创建 `architecture.md` 和 `tech-stack.md`。
     5.  🟢 **GREEN (Mode B Check)**:
-        *   *Setup*: `feature-phases-*.md` 存在，但 `architecture.md` 不存在。
+        *   *Setup*: `feature-design-*.md` 存在，但 `architecture.md` 不存在。
         *   *Prompt*: "运行 vibe-design"。
         *   *Verify*: Agent 进入 Mode B 时警告 `architecture.md` 缺失。
 

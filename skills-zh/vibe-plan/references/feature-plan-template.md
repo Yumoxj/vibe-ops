@@ -4,14 +4,14 @@
 
 ---
 
-## 分组计划模板: feature-phases-[name]-g[N]-plan.md
+## 分组计划模板: feature-design-[name]-g[N]-plan.md
 
 ```markdown
 # 实施计划: 分组 [N]
 
 > Plan Group: G[N]
 > Phases: Phase X, Phase Y
-> Source: feature-phases-[name].md
+> Source: feature-design-[name].md
 > Status: 待确认 / 进行中 / 已完成
 
 ---

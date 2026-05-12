@@ -62,8 +62,7 @@ vibe-plan
 skills/
 ├── vibe-design/
 │   └── references/
-│       ├── feature-design-template.md
-│       └── feature-phases-template.md
+│       └── feature-design-template.md
 ├── vibe-plan/
 │   └── references/
 │       └── feature-plan-template.md
@@ -88,12 +87,14 @@ skills/
 
 ```
 project-root/
-├── docs/
-│   └── plans/                       # 计划/设计文档
 └── memory-bank/
-    ├── feature-phases-[name].md     # 阶段式功能清单（含架构、技术栈、状态）
-    ├── feature-design-[name].md     # 逐阶段设计文档
-    ├── implementation-plan.md       # 实施计划
+    ├── architecture.md              # 项目架构（永不归档）
+    ├── tech-stack.md                # 技术选型（永不归档）
+    ├── designs/
+    │   └── feature-design-[name].md # 功能设计（含阶段划分、计划分组、逐阶段设计）
+    ├── plans/
+    │   ├── feature-design-[name]-g[N]-plan.md  # 分组实施计划
+    │   └── feature-plan-[name].md              # 临时功能计划
     ├── progress.md                  # 进度记录
     └── archive/                     # 归档记录（迭代时不读取）
 ```
@@ -102,9 +103,9 @@ project-root/
 
 | 文档名称 | 初始创建 | 内容填充 | 主要维护 |
 | :--- | :--- | :--- | :--- |
-| `feature-phases-*.md` | vibe-design | vibe-design | vibe-design / vibe-iterate |
-| `feature-design-*.md` | vibe-design | vibe-design | vibe-design |
-| `implementation-plan.md` | vibe-plan | vibe-plan | vibe-review / vibe-archive |
+| `feature-design-*.md` | vibe-design | vibe-design | vibe-design / vibe-iterate |
+| `feature-design-*-g*-plan.md` | vibe-plan | vibe-plan | vibe-iterate / vibe-archive |
+| `feature-plan-*.md` | vibe-plan | vibe-plan | vibe-iterate / vibe-archive |
 | `progress.md` | vibe-iterate | vibe-iterate | vibe-iterate / vibe-archive |
 
 ---

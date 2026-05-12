@@ -331,8 +331,8 @@ your human partner: 你读取了技能，但还是选择了 Option C。
 ### 智能检测测试（vibe-design, vibe-plan, vibe-iterate）
 
 **Glob 文件匹配检测**:
-- Mode A 检测：feature-phases-*.md 不存在 → 创建阶段式功能清单
-- Mode B 检测：feature-phases-*.md 存在 → 设计特定阶段
+- Mode A 检测：feature-design-*.md 不存在 → 创建功能设计文档
+- Mode B 检测：feature-design-*.md 存在 → 设计特定阶段
 - 策略 Fallback 检测：`iteration-strategy.md` 不存在或为 Template
 
 ### 触发条件测试（vibe-archive）

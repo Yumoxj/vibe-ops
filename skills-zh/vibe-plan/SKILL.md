@@ -1,11 +1,11 @@
 ---
 name: vibe-plan
-description: "Use when creating implementation plans from design documents. Outputs to memory-bank as feature-phases-[name]-g[N]-plan.md or feature-plan-*.md."
+description: "Use when creating implementation plans from design documents. Outputs to memory-bank as feature-design-[name]-g[N]-plan.md or feature-plan-*.md."
 ---
 
 # Vibe Plan
 
-## Overview
+## 概述
 
 **Vibe Plan** 将设计文档转化为可执行的实施计划。通过交互式问答逐个探索实施维度，确保每步可验证。
 
@@ -16,7 +16,7 @@ description: "Use when creating implementation plans from design documents. Outp
 - **Code ban** — 计划含代码会导致 AI 直接复制而非理解
 
 智能检测：
-- `feature-phases-*-g*-plan.md` 未找到对应分组 → 分组计划模式（为该分组创建计划）
+- `feature-design-*-g*-plan.md` 未找到对应分组 → 分组计划模式（为该分组创建计划）
 - 所有分组计划已存在 → 临时功能计划模式（创建独立功能计划）
 
 ```dot
@@ -25,7 +25,7 @@ digraph plan_overview {
     node [fontname="Arial", fontsize=12];
 
     start [shape=ellipse, label="用户调用 /vibe-plan"];
-    phase1 [shape=box, label="Phase 1: 模式检测\n(Glob feature-phases-*-g*-plan.md)"];
+    phase1 [shape=box, label="Phase 1: 模式检测\n(Glob feature-design-*-g*-plan.md)"];
     phase2 [shape=box, label="Phase 2: 交互式计划\n(AskUserQuestion)"];
     phase3 [shape=ellipse, label="Phase 3: 下一步建议"];
 
@@ -37,19 +37,19 @@ digraph plan_overview {
 
 ---
 
-## When to Use
+## 使用场景
 
-**使用场景：**
-- 主项目实施计划：从项目设计文档创建实施计划
-- 功能实施计划：从功能设计文档创建实施步骤
+**适用于：**
+- 主项目实施计划：从功能设计文档创建实施计划
+- 功能实施计划：从特定阶段设计创建实施步骤
 
-**不适用场景：**
+**不适用于：**
 - 创建设计文档（使用 /vibe-design）
 - 直接执行实施（使用 /vibe-iterate）
 
 ---
 
-## References
+## 参考文件
 
 | 参考文件 | 用途 |
 |----------|------|
@@ -60,26 +60,26 @@ digraph plan_overview {
 ## Phase 1: 检测计划上下文
 
 ```bash
-Glob pattern: "memory-bank/plans/feature-phases-*-g*-plan.md"
-Glob pattern: "memory-bank/designs/feature-phases-*.md"
+Glob pattern: "memory-bank/plans/feature-design-*-g*-plan.md"
+Glob pattern: "memory-bank/designs/feature-design-*.md"
 ```
 
-**Step 1:** 读取 `feature-phases-*.md`，提取 Plan Groups 部分。
+**Step 1:** 读取 `feature-design-*.md`，提取 Plan Groups 部分。
 
-**Step 2:** 检查哪些分组已有计划文件。对每个分组，检查 `feature-phases-[name]-g[N]-plan.md` 是否存在。
+**Step 2:** 检查哪些分组已有计划文件。对每个分组，检查 `feature-design-[name]-g[N]-plan.md` 是否存在。
 
 | 检测结果 | 模式 | 动作 |
 |----------|------|------|
 | 有分组缺少计划文件 | **分组计划模式** | 为每个缺失分组进入 Phase 2.1 |
 | 所有分组计划已存在 | **临时功能计划模式** | 进入 Phase 2.2 |
-| 未找到 `feature-phases-*.md` | **询问用户** | 用 AskUserQuestion 确认意图 |
+| 未找到 `feature-design-*.md` | **询问用户** | 用 AskUserQuestion 确认意图 |
 
 ```dot
 digraph detect_flow {
     rankdir=TB;
     node [fontname="Arial", fontsize=12];
 
-    check [shape=diamond, label="feature-phases-*.md\n是否存在？"];
+    check [shape=diamond, label="feature-design-*.md\n是否存在？"];
     groups [shape=diamond, label="所有分组\n都有计划？"];
     group_mode [shape=box, label="分组计划模式\n(Phase 2.1)"];
     adhoc [shape=box, label="临时功能计划\n(Phase 2.2)"];
@@ -93,8 +93,8 @@ digraph detect_flow {
 ```
 
 **命名规范：**
-- 分组计划：`memory-bank/plans/feature-phases-[name]-g[N]-plan.md`
-- 示例：`feature-phases-messaging.md` G1 → `feature-phases-messaging-g1-plan.md`
+- 分组计划：`memory-bank/plans/feature-design-[name]-g[N]-plan.md`
+- 示例：`feature-design-messaging.md` G1 → `feature-design-messaging-g1-plan.md`
 
 ---
 
@@ -111,10 +111,9 @@ digraph detect_flow {
 ### 2.1 分组计划模式
 
 **读取上下文：**
-- `memory-bank/designs/feature-phases-*.md`（Plan Groups 部分 + 阶段详情）
-- 分组内各阶段对应的 `memory-bank/designs/feature-design-*.md`（如存在）
-- `memory-bank/architecture.md`（如存在）
-- `memory-bank/tech-stack.md`（如存在）
+- `memory-bank/designs/feature-design-*.md`（Plan Groups 部分 + Phases 表 + Phase Designs）
+- `memory-bank/architecture.md`
+- `memory-bank/tech-stack.md`
 
 对每个缺少计划的分组，逐个探索以下维度：
 
@@ -123,13 +122,13 @@ digraph detect_flow {
 3. **步骤拆分** — 将分组内每个阶段拆分为可验证的具体步骤
 4. **步骤依赖关系** — 跨阶段的步骤先后依赖
 
-**创建文档：** `memory-bank/plans/feature-phases-[name]-g[N]-plan.md`
+**创建文档：** `memory-bank/plans/feature-design-[name]-g[N]-plan.md`
 
 **文档头部：**
 ```markdown
 > Plan Group: G[N]
 > Phases: Phase X, Phase Y
-> Source: feature-phases-[name].md
+> Source: feature-design-[name].md
 > Status: pending
 ```
 
@@ -143,7 +142,7 @@ digraph detect_flow {
 
 **迭代策略（内联规则）：**
 - 分组内每个阶段完成后，更新 `memory-bank/progress.md`
-- 仅当架构发生变更时，更新 `memory-bank/designs/feature-phases-*.md`
+- 每个 group 完成后，更新 `memory-bank/designs/feature-design-*.md` 中 Phases 表的状态
 - 每阶段完成时，询问用户是否 git 提交
 
 **验证：**
@@ -162,10 +161,9 @@ digraph detect_flow {
 适用于：所有分组计划已存在，用户需要额外的独立功能计划。
 
 **读取上下文：**
-- 对应的 `memory-bank/designs/feature-design-*.md`
-- `memory-bank/designs/feature-phases-*.md`（了解已有阶段划分）
-- `memory-bank/architecture.md`（如存在）
-- `memory-bank/tech-stack.md`（如存在）
+- 对应的 `memory-bank/designs/feature-design-*.md`（相关 Phase Design 部分）
+- `memory-bank/architecture.md`
+- `memory-bank/tech-stack.md`
 
 逐个探索：
 1. **功能目标确认** — 这个功能要达成什么

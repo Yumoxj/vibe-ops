@@ -57,8 +57,8 @@ digraph review_overview {
 
 | 目标 | 检测方式 | 审查类型 |
 |------|----------|----------|
-| 设计文档 | `memory-bank/designs/feature-phases-*.md` 或 `memory-bank/designs/feature-design-*.md` | 文档审查 |
-| 实施计划 | `memory-bank/plans/feature-phases-*-g*-plan.md` 或 `memory-bank/plans/feature-plan-*.md` | 文档审查 |
+| 设计文档 | `memory-bank/designs/feature-design-*.md` | 文档审查 |
+| 实施计划 | `memory-bank/plans/feature-design-*-g*-plan.md` 或 `memory-bank/plans/feature-plan-*.md` | 文档审查 |
 | 代码变更 | 当前分支与 base 分支的 diff | 代码审查 |
 
 不确定时用 AskUserQuestion 确认意图。
