@@ -4,7 +4,7 @@ Guidance for Claude Code (claude.ai/code) working in this repo.
 
 ## Project Overview
 
-Vibe Skills = 7 structured AI pair-programming skills enforcing dev discipline. Skills = Markdown files (`SKILL.md` + `agents/references/scripts`), loaded by Claude Code at runtime. No build step, no runtime deps, no compiled output.
+Vibe Skills = 8 structured AI pair-programming skills enforcing dev discipline. Skills = Markdown files (`SKILL.md` + `agents/references/scripts`), loaded by Claude Code at runtime. No build step, no runtime deps, no compiled output.
 
 ## Commands
 
@@ -17,7 +17,7 @@ No build/lint/test commands. Documentation-only skill repo.
 ### Skill Lifecycle Flow
 
 ```
-vibe-design → vibe-plan → vibe-review → vibe-iterate → vibe-clean / vibe-hunt / vibe-archive
+vibe-explore → vibe-design → vibe-plan → vibe-review → vibe-iterate → vibe-clean / vibe-hunt / vibe-archive
 ```
 
 Each skill invoked as `/vibe-<name>`, operates on shared `memory-bank/` in target project.
@@ -54,6 +54,10 @@ memory-bank/
 | `archive/` | vibe-archive | Completed items (never read by vibe-iterate) |
 
 **Plan file naming:** `feature-design-[name]-g[N]-plan.md` in `plans/` — one plan file per Plan Group defined in `designs/feature-design-*.md`. Groups are evaluated by vibe-design based on phase coupling and complexity.
+
+### vibe-explore: Exploration and Documentation
+
+Optional pre-project skill. Produces research and documentation in `docs/` (not `memory-bank/`). Four document types with prefixes: `topic-`, `api-`, `guide-`, `notes-`. Three depth levels (Surface, Standard, Deep) control source count and cross-validation. Uses context7, tavily, web reader for external research; local codebase analysis for API refs and guides.
 
 ### vibe-iterate: Controller + Subagent Pattern
 
@@ -129,6 +133,7 @@ Repo has GitHub description set manually. After skill updates, check if descript
 
 - **No code in plans**: vibe-plan steps = instructions only, never implementation code
 - **No auto-execution**: After design/plan/review, skills stop, wait for user instruction
+- **Source citation**: vibe-design, vibe-explore, and vibe-plan must cite external sources (URL, `refs/` files) and append reference lists. Follow: explore/collect → write → verify against sources.
 - **Skill frontmatter**: Each `SKILL.md` has YAML frontmatter with `name` and `description` for skill discovery
 - **Agent definitions**: Markdown files in `agents/` subdirectories define subagent behavior
 - **Reference templates**: `references/` directories contain output format templates

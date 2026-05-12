@@ -15,6 +15,9 @@ description: "Use when creating implementation plans from design documents. Outp
 - **Verification** — 每步必须包含验证标准
 - **Code ban** — 计划含代码会导致 AI 直接复制而非理解
 
+硬规则：
+- **所有文档内容必须注明参考出处。** 每个设计决策、技术约束或依赖选择如引用外部资料，必须标注来源（URL、`refs/` 文件）。文档末尾附参考列表。遵循原则：先探索收集资料 → 编写文档 → 后验证。
+
 智能检测：
 - `feature-design-*-g*-plan.md` 未找到对应分组 → 分组计划模式（为该分组创建计划）
 - 所有分组计划已存在 → 临时功能计划模式（创建独立功能计划）

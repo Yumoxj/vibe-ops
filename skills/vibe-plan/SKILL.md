@@ -15,6 +15,9 @@ Core principles:
 - **Verification** — Every step must include verification criteria
 - **Code ban** — Plans containing code cause AI to copy instead of understand
 
+Hard rules:
+- **All document content must cite sources.** Every design decision, technical constraint, or dependency choice drawn from external materials must reference its source (URL, `refs/` file). Append a reference list at the end of the document. Follow the principle: explore and collect first → write document → verify against sources.
+
 Smart detection:
 - `feature-design-*-g*-plan.md` not found for a group → Group plan mode (create plan for that group)
 - All group plans exist → Ad-hoc feature plan mode (create standalone feature plan)

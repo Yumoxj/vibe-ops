@@ -1,6 +1,6 @@
 # Vibe Ops
 
-AI 结对编程的操作协议。7 个结构化技能，强制开发纪律——设计、计划、审查、执行、调试、清理、归档，每个阶段有硬规则和升级策略。
+AI 结对编程的操作协议。8 个结构化技能，强制开发纪律——探索、设计、计划、审查、执行、调试、清理、归档，每个阶段有硬规则和升级策略。
 
 ## 技能总览
 
@@ -8,6 +8,7 @@ AI 结对编程的操作协议。7 个结构化技能，强制开发纪律——
 
 | 技能 | 用途 | 何时使用 |
 |------|------|----------|
+| **vibe-explore** | 领域探索、技术研究、文档编写 | 新项目前研究技术、库/框架，或编写项目文档 |
 | **vibe-design** | 项目初始化、设计文档创建 | 新项目或添加功能时，创建设计文档 |
 
 ### 计划与确认阶段技能
@@ -38,8 +39,8 @@ AI 结对编程的操作协议。7 个结构化技能，强制开发纪律——
 ```
 准备与设计 → 计划与确认 → 执行 → 维护
      ↓            ↓          ↓        ↓
- vibe-design  vibe-plan  vibe-iterate  vibe-clean
-                vibe-review              vibe-hunt
+ vibe-explore vibe-plan  vibe-iterate  vibe-clean
+ vibe-design  vibe-review              vibe-hunt
                                          vibe-archive
 ```
 
@@ -48,12 +49,14 @@ AI 结对编程的操作协议。7 个结构化技能，强制开发纪律——
 ```
 设计 → 确认 → 执行
   ↓       ↓      ↓
-vibe-design  vibe-review  vibe-iterate
+vibe-explore  vibe-review  vibe-iterate
+vibe-design
 vibe-plan
 ```
 
 ## 核心理念
 
+- **Exploration First**: 设计前先研究技术和收集上下文，或从代码库分析编写项目文档。
 - **Brainstorming**: 复杂设计通过交互式问答探索。
 - **Step-by-Step Verification**: 执行阶段一步一验证，用户掌握控制权。
 - **Memory Bank**: 维护项目上下文的核心存储结构。
@@ -62,6 +65,9 @@ vibe-plan
 
 ```
 skills/
+├── vibe-explore/
+│   └── references/
+│       └── output-template.md
 ├── vibe-design/
 │   └── references/
 │       └── feature-design-template.md

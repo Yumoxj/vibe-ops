@@ -104,6 +104,15 @@ This document contains the merged feature design template used by the `vibe-desi
 
 ---
 
+## References
+
+| Source | What it informed |
+|--------|-----------------|
+| [External URL or `refs/filename.md`] | [What was referenced from this source] |
+| [External URL or `refs/filename.md`] | [What was referenced from this source] |
+
+---
+
 ## Next Steps
 
 After confirming the design, use /vibe-plan to create implementation plans for each group.

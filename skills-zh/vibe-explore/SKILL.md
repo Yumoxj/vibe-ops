@@ -17,6 +17,7 @@ description: "Use when exploring a domain, researching technologies, or collecti
 - **输出后不自动执行。** 停下来等用户指示。
 - **不生成代码。** 这个技能产出文档，不产出实现代码。
 - **研究前必须确认范围。** 不要在错误的主题上浪费 API 调用。
+- **所有文档内容必须注明参考出处。** 每个声明、发现或技术细节如引用外部资料，必须标注来源（URL、`refs/` 文件）。文档末尾附参考列表。遵循原则：先探索收集资料 → 编写文档 → 后验证。
 
 ```dot
 digraph explore_overview {

@@ -55,6 +55,15 @@ This document contains the feature plan templates used by the `vibe-plan` skill.
 **Dependent modules:** [Which existing modules are needed]
 **Affected files:** [Which existing files will be modified]
 **New files:** [Which new files will be created]
+
+---
+
+## References
+
+| Source | What it informed |
+|--------|-----------------|
+| [External URL or `refs/filename.md`] | [What was referenced from this source] |
+| [External URL or `refs/filename.md`] | [What was referenced from this source] |
 ```
 
 ---
@@ -100,4 +109,13 @@ This document contains the feature plan templates used by the `vibe-plan` skill.
 **Dependent modules:** [Which existing modules are needed]
 **Affected files:** [Which existing files will be modified]
 **New files:** [Which new files will be created]
+
+---
+
+## References
+
+| Source | What it informed |
+|--------|-----------------|
+| [External URL or `refs/filename.md`] | [What was referenced from this source] |
+| [External URL or `refs/filename.md`] | [What was referenced from this source] |
 ```

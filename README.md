@@ -1,6 +1,6 @@
 # Vibe Ops
 
-AI pair-programming protocols. 7 structured skills enforcing development discipline — design, plan, review, execution, debugging, cleanup, and archiving — each with hard rules and escalation strategies.
+AI pair-programming protocols. 8 structured skills enforcing development discipline — exploration, design, plan, review, execution, debugging, cleanup, and archiving — each with hard rules and escalation strategies.
 
 [中文文档](README.zh-CN.md)
 
@@ -10,6 +10,7 @@ AI pair-programming protocols. 7 structured skills enforcing development discipl
 
 | Skill | Purpose | When to Use |
 |-------|---------|-------------|
+| **vibe-explore** | Domain exploration, technology research, documentation writing | Before starting a new project, researching libraries/frameworks, or writing project docs |
 | **vibe-design** | Project initialization, design document creation | Starting a new project or adding a feature |
 
 ### Planning & Validation
@@ -40,8 +41,8 @@ AI pair-programming protocols. 7 structured skills enforcing development discipl
 ```
 Preparation & Design → Planning & Validation → Execution → Maintenance
          ↓                    ↓                  ↓            ↓
-    vibe-design          vibe-plan          vibe-iterate  vibe-clean
-                         vibe-review                      vibe-hunt
+    vibe-explore         vibe-plan          vibe-iterate  vibe-clean
+    vibe-design          vibe-review                      vibe-hunt
                                                           vibe-archive
 ```
 
@@ -50,12 +51,14 @@ Preparation & Design → Planning & Validation → Execution → Maintenance
 ```
     Design      →   Validation   →   Execution
        ↓               ↓                ↓
-  vibe-design     vibe-review     vibe-iterate
+  vibe-explore    vibe-review     vibe-iterate
+  vibe-design
   vibe-plan
 ```
 
 ## Core Concepts
 
+- **Exploration First**: Research technologies and collect context before designing, or write project docs from codebase analysis.
 - **Brainstorming**: Complex designs explored through interactive Q&A.
 - **Step-by-Step Verification**: One step, one verification during execution — user stays in control.
 - **Memory Bank**: The central storage structure maintaining project context across all skills.
@@ -64,6 +67,9 @@ Preparation & Design → Planning & Validation → Execution → Maintenance
 
 ```
 skills/
+├── vibe-explore/
+│   └── references/
+│       └── output-template.md
 ├── vibe-design/
 │   └── references/
 │       └── feature-design-template.md

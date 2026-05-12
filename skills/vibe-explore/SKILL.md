@@ -17,6 +17,7 @@ Hard rules:
 - **No auto-execution after output.** Stop and wait for user instruction.
 - **No code generation.** This skill produces documents, not implementation code.
 - **Always confirm scope before research.** Don't burn API calls on the wrong topic.
+- **All document content must cite sources.** Every claim, finding, or technical detail drawn from external materials must reference its source (URL, `refs/` file). Append a reference list at the end of the document. Follow the principle: explore and collect first → write document → verify against sources.
 
 ```dot
 digraph explore_overview {

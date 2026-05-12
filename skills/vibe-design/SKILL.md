@@ -18,6 +18,7 @@ Hard rules:
 - **tech-stack.md and architecture.md must exist before any design work.** If either is missing, create or supplement them first. This is a blocking check — no design work proceeds without both files.
 - **Initialization must happen before any code is written.** Regardless of project urgency, scale, or partner opinion. Without the memory-bank structure, all subsequent vibe skills will fail.
 - **If memory-bank is missing, pause coding immediately.** Already-written code is not lost, but it must be brought under the memory-bank management structure before continuing.
+- **All document content must cite sources.** Every claim, decision, or technical detail drawn from external materials must reference its source (URL, `refs/` file). Append a reference list at the end of the document. Follow the principle: explore and collect first → write document → verify against sources.
 
 Smart detection:
 - No `feature-design-*.md` → Create new feature design document (Mode A)

@@ -18,6 +18,7 @@ description: "Use when creating design documents for a new project or new featur
 - **tech-stack.md 和 architecture.md 必须在设计工作开始前存在。** 如任一缺失，必须先创建或补充。这是阻塞性检查——没有这两个文件不能进行任何设计工作。
 - **初始化必须在任何代码编写之前。** 无论项目紧急程度、规模大小、partner 意见。没有 memory-bank 结构，后续所有 vibe 技能都会失效。
 - **发现缺少 memory-bank 时立即暂停编码。** 已写代码不会丢失，但必须纳入 memory-bank 管理结构后才能继续。
+- **所有文档内容必须注明参考出处。** 每个声明、决策或技术细节如引用外部资料，必须标注来源（URL、`refs/` 文件）。文档末尾附参考列表。遵循原则：先探索收集资料 → 编写文档 → 后验证。
 
 智能检测：
 - 无 `feature-design-*.md` → 创建新功能设计文档（Mode A）
