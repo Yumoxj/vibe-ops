@@ -32,18 +32,22 @@ memory-bank/
 ├── tech-stack.md            # Technology choices (never archived)
 ├── progress.md              # Execution log
 ├── designs/
-│   └── feature-design-*.md  # Feature design with phases, plan groups, and per-phase design
+│   └── feature-design-*.md  # Feature design (conditionally archivable: user chooses all or keep latest)
 ├── plans/
 │   ├── feature-design-*-g*-plan.md  # Per-group implementation plans
 │   └── feature-plan-*.md            # Ad-hoc feature plans
 └── archive/                 # Completed items (never read by vibe-iterate)
+    ├── progress/
+    ├── features/
+    ├── plans/
+    └── designs/
 ```
 
 | File | Created by | Purpose |
 |------|-----------|---------|
 | `architecture.md` | vibe-design | Single source of truth for project architecture (never archived) |
 | `tech-stack.md` | vibe-design | Single source of truth for technology choices (never archived) |
-| `designs/feature-design-*.md` | vibe-design | Feature design document with phases table, plan groups, and per-phase design sections |
+| `designs/feature-design-*.md` | vibe-design | Feature design document with phases table, plan groups, and per-phase design sections (conditionally archivable via vibe-archive) |
 | `plans/feature-design-*-g*-plan.md` | vibe-plan | Per-group implementation plan with verification criteria |
 | `plans/feature-plan-*.md` | vibe-plan | Ad-hoc feature-specific implementation plan |
 | `progress.md` | vibe-iterate | Execution log (date, step, key changes) |

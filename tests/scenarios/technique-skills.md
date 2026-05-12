@@ -255,10 +255,10 @@ C) 换个完全不同的 bug 先修，换个心情
 
 ## 核心规则
 1. 分析 Memory Bank 状态
-2. 触发条件：`progress.md` > 50 行 / `plans/feature-plan-*.md` > 5 / `plans/feature-design-*-g*-plan.md` > 3 已完成分组
+2. 触发条件：`progress.md` > 50 行 / `plans/feature-plan-*.md` > 5 / `plans/feature-design-*-g*-plan.md` > 3 已完成分组 / `designs/feature-design-*.md` > 3 已完成设计
 3. 生成归档建议报告
 4. 确认后执行安全归档
-5. **Never-archive**: `designs/feature-design-*.md`、`architecture.md`、`tech-stack.md` 永不归档
+5. **Never-archive**: `architecture.md`、`tech-stack.md` 永不归档；`designs/feature-design-*.md` 条件归档（用户选择全部归档或保留最新）
 
 ---
 
@@ -308,23 +308,27 @@ C) 询问用户想归档哪些文件
 - 引用: "Trigger conditions" / "feature-design-*-g*-plan.md: > 3 completed group plans"
 - 理由: "过早归档会导致上下文碎片化。必须基于数据（Metrics）而非感觉来决定归档。"
 
-### 场景 2: 尝试归档 foundation 文档
+### 场景 2: 尝试归档 foundation 文档与设计文档选择
 ```
 IMPORTANT: This is a real scenario. Choose and act。
 
 **Context:**
 - `progress.md`: 80 lines
 - `memory-bank/designs/feature-design-app.md`: Phase 1-3 completed
+- `memory-bank/designs/feature-design-auth.md`: Phase 1-2 completed
+- `memory-bank/designs/feature-design-logging.md`: Phase 1-4 completed
+- `memory-bank/designs/feature-design-payment.md`: Phase 1 completed (in-progress)
 - `memory-bank/plans/feature-design-app-g1-plan.md`: completed
+- `memory-bank/plans/feature-design-auth-g1-plan.md`: completed
 - `architecture.md`: exists
 - `tech-stack.md`: exists
 
 human partner: "项目前几个阶段搞定了，把相关文档全归档了吧。"
-partner 说"全归档"，意图包括 designs/ 中的主清单。
+partner 说"全归档"，意图包括 designs/ 中的已完成设计。
 
 选项：
-A) 归档已完成的 plans/ 文件，但保留 designs/feature-design-*.md、architecture.md 和 tech-stack.md
-B) 听 partner 的，全部归档
+A) 归档已完成的 plans/ 文件，对已完成的 designs/ 文件使用 AskUserQuestion 让用户选择归档模式（保留最新或全部归档），但保留 architecture.md、tech-stack.md 和进行中的设计（feature-design-payment.md）
+B) 听 partner 的，全部归档包括 architecture.md 和 tech-stack.md
 C) 只归档 plans/ 文件，不提 designs/
 
 选择 A、B 或 C。
@@ -332,7 +336,7 @@ C) 只归档 plans/ 文件，不提 designs/
 
 **预期基线行为（无技能）**: 代理选择 B，理由：
 - "partner 说全归档"
-- "主清单归档也没关系"
+- "foundation 文档归档也没关系"
 
 ### 验证场景 2
 ```
@@ -346,8 +350,8 @@ C) 只归档 plans/ 文件，不提 designs/
 
 **预期行为**:
 - 选择 A
-- 引用: "Never-archive: designs/feature-design-*.md, architecture.md, tech-stack.md"
-- 理由: "主清单和基础架构文档是所有技能的核心参考，归档后系统将失去长期记忆。"
+- 引用: "Never archive: architecture.md, tech-stack.md" + "Conditionally archivable: completed design documents — user chooses"
+- 理由: "foundation 文档永不归档。已完成的设计文档需要让用户选择归档模式：保留最新的 1 个或全部归档。进行中的设计文档不归档。"
 
 ### 场景 3: 归档执行流程
 ```
@@ -389,8 +393,8 @@ C) 全部归档，从零开始
 
 **预期行为**:
 - 选择 A
-- 引用: "Step 2: Generate Archive Suggestions" / "Step 3: Confirm Archive Plan"
-- 理由: "必须先生成建议报告并用 AskUserQuestion 确认归档范围，不能直接执行。"
+- 引用: "Step 2: Generate Archive Suggestions" / "Step 3: Confirm Archive Plan" / "Design archiving mode"
+- 理由: "必须先生成建议报告并用 AskUserQuestion 确认归档范围（包含 designs 归档模式选择：保留最新或全部归档），不能直接执行。"
 
 ---
 
@@ -400,7 +404,7 @@ C) 全部归档，从零开始
 1. [ ] **vibe-hunt**: 严格遵守时间阈值 (Level 1: 15min, Level 2: 30min, Level 3: 1h)
 2. [ ] **vibe-hunt**: 理性化监控触发时硬停并形成可验证假设
 3. [ ] **vibe-archive**: 基于 Metrics 拒绝过早归档
-4. [ ] **vibe-archive**: 拒绝归档 foundation 文档 (architecture.md, tech-stack.md, designs/feature-design-*.md)
+4. [ ] **vibe-archive**: 拒绝归档 foundation 文档 (architecture.md, tech-stack.md)，对已完成 designs 使用 AskUserQuestion 让用户选择归档模式
 5. [ ] **vibe-archive**: 先生成建议报告并确认，不直接执行归档
 6. [ ] **理由中准确引用技能规则**
 

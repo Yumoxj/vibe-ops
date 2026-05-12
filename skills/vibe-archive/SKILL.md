@@ -1,6 +1,6 @@
 ---
 name: vibe-archive
-description: "Use when memory-bank becomes bloated (progress.md > 50 steps, > 5 completed features, or > 3 completed phases). Analyzes state and archives completed tasks to optimize AI context."
+description: "Use when memory-bank becomes bloated (progress.md > 50 steps, > 5 completed features, > 3 completed group plans, or > 3 completed designs). Analyzes state and archives completed tasks and designs to optimize AI context."
 ---
 
 # Vibe Archive
@@ -35,11 +35,17 @@ digraph archive_usage {
 - `progress.md`: > 50 steps
 - `memory-bank/plans/feature-plan-*.md`: > 5 completed features
 - `memory-bank/plans/feature-design-*-g*-plan.md`: > 3 completed group plans
+- `memory-bank/designs/feature-design-*.md`: > 3 completed designs
+
+**Never archive (always keep):**
+- Architecture document (`memory-bank/architecture.md`)
+- Tech stack document (`memory-bank/tech-stack.md`)
+
+**Conditionally archivable (user choice at confirmation):**
+- Completed design documents (`memory-bank/designs/feature-design-*.md`) — user chooses: archive all or keep latest (recommended)
 
 **Do not archive:**
-- Main design document (`memory-bank/designs/feature-design-*.md`) — always keep
-- Architecture document (`memory-bank/architecture.md`) — always keep
-- Tech stack document (`memory-bank/tech-stack.md`) — always keep
+- In-progress design documents (incomplete `memory-bank/designs/feature-design-*.md`)
 - In-progress feature documents (incomplete `memory-bank/plans/feature-plan-*.md`)
 - In-progress group plan files (incomplete `memory-bank/plans/feature-design-*-g*-plan.md`)
 
@@ -53,7 +59,8 @@ Analyze the following:
 1. Count `progress.md` lines and date range
 2. Scan `memory-bank/plans/feature-plan-*.md` files, identify completed and in-progress features
 3. Scan `memory-bank/plans/feature-design-*-g*-plan.md` files, identify completed group plans
-4. Assess whether archiving is needed
+4. Scan `memory-bank/designs/feature-design-*.md` files, identify completed and in-progress designs
+5. Assess whether archiving is needed
 
 ### Step 2: Generate Archive Suggestions
 
@@ -65,6 +72,12 @@ Output current state statistics and archiving suggestions.
 ### Step 3: Confirm Archive Plan
 
 Use AskUserQuestion to confirm archiving scope.
+
+**Design archiving mode** (when completed designs exist):
+- **Keep latest (recommended)**: Archive all completed designs except the most recently modified one. The kept design remains as active context for ongoing work.
+- **Archive all**: Move all completed designs to archive. Use when starting a new major phase with no dependency on prior designs.
+
+Include the chosen mode in the confirmation summary before executing.
 
 ### Step 4: Execute Archive
 
@@ -78,6 +91,8 @@ memory-bank/archive/
 │   └── features-archive-YYYY-MM-DD.md
 ├── plans/
 │   └── plans-archive-YYYY-MM-DD.md
+├── designs/
+│   └── designs-archive-YYYY-MM-DD.md
 └── archived-items.md
 ```
 
@@ -99,6 +114,7 @@ memory-bank/archive/
 | YYYY-MM-DD | progress-archive-YYYY-MM-DD.md | Completed steps from progress.md [date range] |
 | YYYY-MM-DD | features-archive-YYYY-MM-DD.md | [Feature name list] |
 | YYYY-MM-DD | plans-archive-YYYY-MM-DD.md | Group plans [1-N] |
+| YYYY-MM-DD | designs-archive-YYYY-MM-DD.md | [Design name list] (mode: keep latest / archive all) |
 ```
 
 ### Step 5: Verify
@@ -108,8 +124,9 @@ memory-bank/archive/
 | Archive completeness | Archive files created correctly |
 | Index completeness | archived-items.md index is complete |
 | In-progress content | In-progress content is unaffected |
-| Main design document | `memory-bank/designs/feature-design-*.md` was not moved |
-| Architecture/tech-stack docs | architecture.md and tech-stack.md were not moved |
+| Foundation docs | architecture.md and tech-stack.md were not moved |
+| Design archiving mode | If "keep latest": exactly 1 completed design remains in designs/ |
+| Design archiving mode | If "archive all": no completed designs remain in designs/ |
 
 ---
 
@@ -117,9 +134,10 @@ memory-bank/archive/
 
 | Mistake | Consequence | Correct approach |
 |---------|-------------|------------------|
-| Archive main design document | Lost core context | Main design document, architecture.md, and tech-stack.md are always kept |
-| Archive incomplete features | Feature information lost | Only archive completed features |
+| Archive architecture.md or tech-stack.md | Lost foundation context | These are never archived, regardless of user request |
+| Archive incomplete designs or features | Active work lost | Only archive completed items |
 | Skip user confirmation | Accidentally delete important files | Must wait for user confirmation |
+| Skip design archiving mode question | Unclear what remains in designs/ | Always ask user to choose archive all or keep latest |
 
 ---
 
